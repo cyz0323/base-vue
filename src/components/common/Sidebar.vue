@@ -48,15 +48,22 @@
                         index: "zcgl",
                         title: "资产管理",
                         subs: [
-                            {index: "zcdbcx",title: "资产调拨查询"},
-                            {index: 'zcdr',title: "资产调入"},
-                            {index: "zcdc",title: "资产调出"}
+                            {index: "zctj", title: "资产添加"},
+                            {index: "zcdb",title: "资产调拨",subs:[
+                                    {index: "zcdbcx",title: "资产调拨查询"},
+                                    {index: 'nbzcdc',title: "内部资产调出"},
+                                    {index: 'nbzcdr',title: "内部资产调入"},
+                                    {index: 'wbzcdc',title: "外部资产调出"},
+                                    {index: "wbzcdr",title: "外部资产调入"}
+                                ]
+                            },
+
                         ]
                     },
                     {
                         icon: "el-icon-lx-copy",
                         index: 'api',
-                        title: "api",
+                        title: "element-api",
                         subs: [
                             {/*icon: 'el-icon-lx-cascades',*/index: 'table',title: '基础表格'},
                             {/*icon: 'el-icon-lx-copy',*/index: 'tabs',title: 'tab选项卡'},
@@ -82,6 +89,22 @@
                                     {index: '404',title: '404页面'}
                                 ]
                             }
+                        ]
+                    },
+                    {
+                        icon: "el-icon-s-grid",
+                        index: "zdyzj",
+                        title: "自定义组件",
+                        subs: [
+                            {index: "from", title: "表单相关",
+                                subs: [
+                                    {index: 'select',title: '定义下拉组件'},
+                                    {index: 'custom_select',title: '复杂选择组件'}
+                                ]
+                            },
+                            {index: "fileUpload", title: "资源上传"},
+                            {index: "showImage", title: "图片回显"},
+                            {index: "customTable",title: "定义表格"}
                         ]
                     },
                 ]
