@@ -98,10 +98,10 @@
                         subs: [
                             {index: "from", title: "表单相关",
                                 subs: [
-                                    {index: 'select',title: '定义下拉组件'},
-                                    {index: 'custom_select',title: '复杂选择组件'}
+                                    {index: 'select',title: '定义下拉组件'}
                                 ]
                             },
+                            {index: 'custom_select',title: '复杂选择组件'},
                             {index: "fileUpload", title: "资源上传"},
                             {index: "showImage", title: "图片回显"},
                             {index: "customTable",title: "定义表格"}

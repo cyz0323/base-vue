@@ -102,6 +102,11 @@ export default new Router({
                     component: resolve => require(['../components/page/common/custom_select.vue'], resolve),
                     meta: {title: '复杂选择组件'}
                 },
+                {
+                    path: '/customTable',
+                    component: resolve => require(['../components/page/common/custom_table.vue'], resolve),
+                    meta: {title: '自定义表格'}
+                },
 
                 /*资产添加
                 {

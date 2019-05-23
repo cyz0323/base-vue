@@ -4,15 +4,15 @@ module.exports = {
     devServer: {
         proxy: {
             '/api':{
-                target:'http://localhost:8080',
+                target:'http://localhost:5000',
                 changeOrigin:true,
                 pathRewrite:{
                     '/api':''
                 }
             },
             '/ms':{
-                target: 'https://www.easy-mock.com/mock/592501a391470c0ac1fab128',
-                changeOrigin: true
+                target: 'http://localhost:8080',
+                changeOrigin: true,
             }
         }
     }

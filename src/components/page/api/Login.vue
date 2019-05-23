@@ -16,7 +16,7 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 用户名和密码随便填。</p>
+                <p class="login-tips">Tips : 请输入正确的用户名和密码。</p>
             </el-form>
         </div>
     </div>
@@ -24,11 +24,15 @@
 
 <script>
     export default {
-        data: function(){
+        data(){
             return {
+                request_path: "http://localhost:8888",
+                grant_type: 'password',
+                client_id: 'app',
+                client_secret: 'app',
                 ruleForm: {
-                    username: 'admin',
-                    password: '123123'
+                    username: '',
+                    password: ''
                 },
                 rules: {
                     username: [
@@ -42,10 +46,27 @@
         },
         methods: {
             submitForm(formName) {
+                let self = this;
+                let resultMap = {
+                    grant_type: this.grant_type,
+                    username: this.ruleForm.username,
+                    password: this.ruleForm.password,
+                    client_id: this.client_id,
+                    client_secret: this.client_secret
+                };
+
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/');
+                        this.$axios.post(this.request_path+"/oauth/token",this.$qs.stringify(resultMap),{emulateJSON: true}).then( res =>{
+                            let _data = res.data;
+                            if(_data.status == 0){
+                                localStorage.setItem('user_name',self.ruleForm.username);
+                                localStorage.setItem('user_token',_data.access_token);
+                                self.$router.push("/");
+                            }else{
+                                this.$message("请输入正确的账号和密码！");
+                            }
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;
