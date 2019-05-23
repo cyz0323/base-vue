@@ -26,7 +26,7 @@
     export default {
         data(){
             return {
-                request_path: "http://localhost:8888",
+                request_path: "http://localhost:8888/oauth/token",
                 grant_type: 'password',
                 client_id: 'app',
                 client_secret: 'app',
@@ -47,28 +47,29 @@
         methods: {
             submitForm(formName) {
                 let self = this;
-                let resultMap = {
+                /*let resultParam = {
                     grant_type: this.grant_type,
                     username: this.ruleForm.username,
                     password: this.ruleForm.password,
                     client_id: this.client_id,
                     client_secret: this.client_secret
-                };
-
+                };*/
+                let resultParam  = "?grant_type="+this.grant_type+"&username="+this.ruleForm.username+"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$axios.post(this.request_path+"/oauth/token",this.$qs.stringify(resultMap),{emulateJSON: true}).then( res =>{
+                        //this.$axios.post(this.request_path+"/oauth/token",this.$qs.stringify(resultMap),{emulateJSON: true}).then( res =>{
+                        this.$axios.post(this.request_path+resultParam).then( res =>{
                             let _data = res.data;
                             if(_data.status == 0){
                                 localStorage.setItem('user_name',self.ruleForm.username);
                                 localStorage.setItem('user_token',_data.access_token);
                                 self.$router.push("/");
                             }else{
-                                this.$message("请输入正确的账号和密码！");
+                                this.$message("登陆失败，请确认账号密码是否正确！");
                             }
                         });
                     } else {
-                        console.log('error submit!!');
+                        this.$message("验证失败，请输入正确格式的账号和密码！。")
                         return false;
                     }
                 });

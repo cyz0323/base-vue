@@ -29,7 +29,6 @@
             }
         },
         created(){
-            console.log(this.name);
             this.tableData = this.param.data;
             this.pageCount = this.param.pageCount;
             this.pageSize = this.param.pageSize;
