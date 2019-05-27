@@ -16,7 +16,7 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p class="login-tips">Tips : 请输入正确的用户名和密码。</p>
+                <!--<p class="login-tips">Tips : 请输入正确的用户名和密码。</p>-->
             </el-form>
         </div>
     </div>
@@ -26,8 +26,8 @@
     export default {
         data(){
             return {
-                request_path: "http://localhost:8888/oauth/token",   //http://localhost:5000/oauth/token
-                request_megUrl: "http://localhost:8888/user",
+                request_path: "http://localhost:5000/oauth/token",   //http://localhost:5000/oauth/token
+                request_msgUrl: "http://localhost:5000/user",
                 grant_type: "password",
                 client_id: "app",
                 client_secret: "app",
@@ -46,43 +46,40 @@
             }
         },
         methods: {
+            //登陆方法
             submitForm(formName) {
                 let self = this;
                 let path=this.request_path+"?grant_type="+this.grant_type+"&username="+this.ruleForm.username
                     +"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
-               /*this.$refs[formName].validate((valid) => {
+                this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.$axios.post(path).then( res =>{
                             let _data = res.data;
                             if(_data.status == 0){
                                 localStorage.setItem('user_name',self.ruleForm.username);
                                 localStorage.setItem('user_token',_data.access_token);
+                                self.setDataMessage(_data.access_token);
                                 self.$router.push("/");
-                            }else if(_data.status == 400) {
-                                this.$message(_data.message);
                             }else{
-                                this.$message("登陆失败，请确认账号密码是否正确！");
+                                this.$message(_data.message);
                             }
                         }).catch(err=>{
-                            this.$message(err.toString());
+                            this.$message(err.response.data.message);
                         });
                     } else {
-                        this.$message("验证失败，请输入正确格式的账号和密码！。");
+                        this.$message("验证失败，输入格式错误！。");
                         return false;
                     }
-                });*/
-
-                this.$axios.post("localhost:8888/user?access_token=bf9c2ed9-c597-47bc-aff2-b92b5756d5a6").then( res =>{
-                    console.log(res);
-                }).catch(err=>{
-                    this.$message(err.toString());
                 });
             },
+            //用户信息存储
             setDataMessage(token){
-                this.$axios.post("localhost:8888/user?access_token="+token).then(res=>{
-                    console.log(res);
+                let self = this;
+                let path = this.request_msgUrl+"?access_token="+token;
+                this.$axios.post(path).then(res=>{
+                    localStorage.setItem("dataMessage",res.data);
                 }).catch(err=>{
-                    console.log(err);
+                    self.$message(err);
                 })
             }
         },

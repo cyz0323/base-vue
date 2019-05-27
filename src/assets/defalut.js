@@ -30,8 +30,10 @@ defaultParam.setUserData = function(url){
     let access_token = localStorage.getItem("user_token");
     if(!!access_token){
         let path = url+"?access_token="+access_token;
-        this.$axios.post("localhost:5000/user?access_token=f89b5dbe-10ae-4308-b09c-37008ebec0a2").then(res=>{
+        this.$axios.post(path).then(res=>{
           console.log(res);
+        }).catch(err=>{
+            console.log(err);
         });
     }else{
         this.logout();

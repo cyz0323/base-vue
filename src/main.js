@@ -4,6 +4,7 @@ import router from './router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
 import VueI18n from 'vue-i18n';
+import VueResource from 'vue-resource';
 import qs from 'qs';    //json转字符串操作
 //自定义组件定义
 import yTable from './components/page/common/components/y-table';
@@ -22,6 +23,7 @@ import "babel-polyfill";
 Vue.config.productionTip = false
 Vue.use(VueI18n);
 Vue.use(ElementUI, {size: 'small'});
+Vue.use(VueResource);
 Vue.prototype.$axios = axios;
 Vue.prototype.$qs = qs;
 Vue.prototype.$my = defaultParam;
