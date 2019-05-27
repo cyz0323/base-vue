@@ -21,8 +21,24 @@ defaultParam.hasUser = function(){
     let token = localStorage.getItem("user_token");
     if(!!token) return true;
     else {
-        localStorage.clear();
-        this.$router.push("/login");
+        this.logout();
     }
+};
+
+//对用户信息的存储根据用户的token获取当前用户的一本信息
+defaultParam.setUserData = function(url){
+    let access_token = localStorage.getItem("user_token");
+    if(!!access_token){
+        let path = url+"?access_token="+access_token;
+        this.$axios.post("localhost:5000/user?access_token=f89b5dbe-10ae-4308-b09c-37008ebec0a2").then(res=>{
+          console.log(res);
+        });
+    }else{
+        this.logout();
+    }
+};
+defaultParam.logout = function(){
+    localStorage.clear();
+    this.$router.push("/login");
 };
 export default defaultParam;

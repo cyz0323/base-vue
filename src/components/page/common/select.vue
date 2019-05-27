@@ -17,29 +17,25 @@
                             参数说明：<br/>
                             1、selOptions：指定当前下拉选的数据，数据格式为、[{key: "key1", value:"value1"},{key: "key2",value: "value2"},...]<br/>
                             2、enableValue：列表默认参数的指定，参数为数据的key值<br/>
+                            3、isCheck：是否多选的指定，true/false
+                            4、isChange：参数改变的触发函数
                             注意：参数的值必须定义在当前页面data中进行了定义，若数据为后台请求，则在页面加载时对下拉组件数据进行初始化定义,若页面为多下拉选则需import引入和初始化多次
+
                         </p>
                         <span class="head-title">样例：</span>
                         <div class="ele" style="padding-left: 30px;">
-                            未指定参数：<yselect2 :selOptions="refOptions"></yselect2><br/><br/>
-                            指定参数：<yselect :selOptions="refOptions" :enableValue="enableValue"></yselect>
+                            <y-select :selOptions="refOptions" :enableValue="enableValue" :isCheck="!isCheck" :isChange="handleChange"></y-select>
                         </div>
                         <span class="head-title">代码：</span>
                         <div class="code">
                             <span class="code-msg">html</span>
                             <div class="code-main">
-                                未指定参数： &lt;yselect :selOptions="refOptions"&gt;&lt;/yselect&gt;<br/>
-                                指定参数： &lt;yselect2 :selOptions="refOptions" :enableValue="enableValue"&gt;&lt;/yselect2&gt;
+                                &lt;y-select :selOptions="refOptions" :enableValue="enableValue" :isCheck="!isCheck" :isChange="handleChange"&gt;&lt;/y-select&gt;
                             </div>
                             <span class="code-msg">script</span>
                             <div class="code-main">
 <pre>
-    import yselect from 'src/components/page/common/components/y-select';
-    import yselect2 from 'src/components/page/common/components/y-select';
     export default {
-        components: {   //定义组件
-            yselect
-        },
         data(){
             return {
                 refOptions: [       //下拉组件数据
@@ -48,6 +44,11 @@
                     {key: "col3", value: "列3"}
                 ],
                 enableValue: "col1"     //下拉默认参数指定
+            }
+        },
+        methods: {
+            handleChange(err){      //参数改变触发
+                this.$message(err);
             }
         }
     }
@@ -69,29 +70,23 @@
                             1、selOptions：指定当前下拉选的数据，数据格式为、[{key: "key1", value:"value1"},{key: "key2",value: "value2"},...]<br/>
                             2、enableValue：列表默认参数的指定，参数为数据的key值<br/>
                             3、isCheck：true，多选的指定<br/>
+                            4、isChange：参数改变的触发函数
                             注意：参数的值必须定义在当前页面data中进行了定义，若数据为后台请求，则在页面加载时对下拉组件数据进行初始化定义
                         </p>
                         <span class="head-title">样例：</span>
                         <div class="ele">
-                            未指定参数：<yselect :selOptions="refOptions"  :isCheck="isCheck"></yselect>
-                            指定参数：<yselect2 :selOptions="refOptions" :enableValue="enableValue2" :isCheck="isCheck"></yselect2><br/><br/>
+                            <y-select :selOptions="refOptions" :enableValue="enableValue" :isCheck="isCheck" :isChange="handleChange2"></y-select>
                         </div>
                         <span class="head-title">代码：</span>
                         <div class="code">
                             <span class="code-msg">html</span>
                             <div class="code-main">
-                                未指定参数： &lt;yselect :selOptions="refOptions" :isCheck="isCheck"&gt;&lt;/yselect&gt;<br/>
-                                指定参数： &lt;yselect2 :selOptions="refOptions" :enableValue="enableValue2" :isCheck="isCheck"&gt;&lt;/yselect2&gt;
+                                &lt;y-select :selOptions="refOptions" :enableValue="enableValue" :isCheck="isCheck" :isChange="handleChange2"&gt;&lt;/y-select&gt;
                             </div>
                             <span class="code-msg">script</span>
                             <div class="code-main">
 <pre>
-    import yselect from 'src/components/page/common/components/y-select';
-    import yselect2 from 'src/components/page/common/components/y-select';
     export default {
-        components: {   //定义组件
-            yselect
-        },
         data(){
             return {
                 refOptions: [       //下拉组件数据
@@ -101,6 +96,11 @@
                 ],
                 enableValue2: ["col1","col2"],,     //下拉默认参数指定
                 isCheck: true
+            }
+        },
+        methods: {
+            handleChange(err){      //参数改变触发
+                 this.$message(e.toString())
             }
         }
     }
@@ -115,13 +115,8 @@
 </template>
 
 <script>
-    import yselect from './components/y-select';
-    import yselect2 from './components/y-select';
     export default {
         name: 'setselect',
-        components: {
-            yselect,yselect2
-        },
         data(){
             return {
                 activeName: 'first-ele',
@@ -137,7 +132,13 @@
         },
         methods:{
             handleClick(tab, event) {
-                console.log(tab, event);
+                //console.log(tab, event);
+            },
+            handleChange(err){
+                this.$message(err);
+            },
+            handleChange2(e){
+                this.$message(e.toString())
             }
         }
     }

@@ -26,10 +26,11 @@
     export default {
         data(){
             return {
-                request_path: "http://localhost:8888/oauth/token",
-                grant_type: 'password',
-                client_id: 'app',
-                client_secret: 'app',
+                request_path: "http://localhost:8888/oauth/token",   //http://localhost:5000/oauth/token
+                request_megUrl: "http://localhost:8888/user",
+                grant_type: "password",
+                client_id: "app",
+                client_secret: "app",
                 ruleForm: {
                     username: '',
                     password: ''
@@ -47,34 +48,44 @@
         methods: {
             submitForm(formName) {
                 let self = this;
-                /*let resultParam = {
-                    grant_type: this.grant_type,
-                    username: this.ruleForm.username,
-                    password: this.ruleForm.password,
-                    client_id: this.client_id,
-                    client_secret: this.client_secret
-                };*/
-                let resultParam  = "?grant_type="+this.grant_type+"&username="+this.ruleForm.username+"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
-                this.$refs[formName].validate((valid) => {
+                let path=this.request_path+"?grant_type="+this.grant_type+"&username="+this.ruleForm.username
+                    +"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
+               /*this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        //this.$axios.post(this.request_path+"/oauth/token",this.$qs.stringify(resultMap),{emulateJSON: true}).then( res =>{
-                        this.$axios.post(this.request_path+resultParam).then( res =>{
+                        this.$axios.post(path).then( res =>{
                             let _data = res.data;
                             if(_data.status == 0){
                                 localStorage.setItem('user_name',self.ruleForm.username);
                                 localStorage.setItem('user_token',_data.access_token);
                                 self.$router.push("/");
+                            }else if(_data.status == 400) {
+                                this.$message(_data.message);
                             }else{
                                 this.$message("登陆失败，请确认账号密码是否正确！");
                             }
+                        }).catch(err=>{
+                            this.$message(err.toString());
                         });
                     } else {
-                        this.$message("验证失败，请输入正确格式的账号和密码！。")
+                        this.$message("验证失败，请输入正确格式的账号和密码！。");
                         return false;
                     }
+                });*/
+
+                this.$axios.post("localhost:8888/user?access_token=bf9c2ed9-c597-47bc-aff2-b92b5756d5a6").then( res =>{
+                    console.log(res);
+                }).catch(err=>{
+                    this.$message(err.toString());
                 });
+            },
+            setDataMessage(token){
+                this.$axios.post("localhost:8888/user?access_token="+token).then(res=>{
+                    console.log(res);
+                }).catch(err=>{
+                    console.log(err);
+                })
             }
-        }
+        },
     }
 </script>
 

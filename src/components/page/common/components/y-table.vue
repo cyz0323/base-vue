@@ -1,16 +1,11 @@
 <template>
    <div>
-       <el-table border :data="tableData" multiple style="width: 100%;" height="100%" >
-           <el-table-column :sortable="isSort" fixed prop="index" label="序号"></el-table-column>
-           <el-table-column :sortable="isSort" prop="date" label="日期"></el-table-column>
-           <el-table-column :sortable="isSort" prop="name" label="姓名"></el-table-column>
-           <el-table-column :sortable="isSort" prop="province" label="省份"></el-table-column>
-           <el-table-column :sortable="isSort" prop="city" label="市区"></el-table-column>
-           <el-table-column :sortable="isSort" prop="address" label="地址"></el-table-column>
-           <el-table-column :sortable="isSort" prop="zip" label="邮编"></el-table-column>
+       <el-table ref="singleTable" border :data="tableData" multiple style="width: 100%;height: 100%;" @row-click="callback.rowClick">
+           <el-table-column fixed type="index" label="序号"></el-table-column>
+           <el-table-column  v-for="item in tableHeader" :sortable="isSort" fixed :prop="item.key" :label="item.value"></el-table-column>
        </el-table>
        <div class="customposition">
-           <el-pagination background layout="prev, pager, next" @current-change="currentChange" @prev-click="prevClick" @next-click="nextClick"  :total="pageCount" :page-size="pageSize" :current-page="pageNo"></el-pagination>
+           <el-pagination background layout="prev, pager, next" @current-change="handlerCurrentChange" :total="pageCount" :page-size="pageSize" :current-page="pageNo"></el-pagination>
            <p class="pageSizeBar">总数：<span class="pageSizeText">{{pageCount}}</span>条</p>
        </div>
    </div>
@@ -18,30 +13,64 @@
 
 <script>
     export default {
-        props: ["data","name","callback"],
+        props: ["data"],
         data(){
             return {
-                key: this.name,     //唯一命名暂时不适用
+                url: "",            //数据请求地址
                 param: this.data,   //参数列表
                 pageCount: 0,       //总数
                 pageSize: 0,        //每页数量
                 pageNo: 0,          //当前页数
+                tableHeader: [],    //表头定义
                 tableData: [],      //表格数据
-                isSort: false,
-                currentChange: null,    //分页参数发生改变时触发
-                prevClick: null,        //分页点击上一页触发
-                nextClick: null         //分页点击下一页触发
+                isSort: false,      //是否排序的指定
+                currentChange: null,//分页参数发生改变时触发
+                callback: {         //行点击事件的定义
+                    rowClick: null,
+                }
             }
         },
         created(){
-            this.tableData = this.param.data;
-            this.pageCount = this.param.pageCount;
-            this.pageSize = !!this.param.pageSize ? this.param.pageSize : 10;
-            this.pageNo = this.param.pageNo;
+            //设置参数
             this.isSort = this.param.isSort;
-            this.currentChange = this.param.callback.currentChange;
-            this.prevClick = this.param.callback.prevClick;
-            this.nextClick = this.param.callback.nextClick;
+            this.url = this.param.url;
+            this.pageSize = !!this.param.pageSize ? this.param.pageSize : 10;
+            //表头的设置
+            this.tableHeader = this.param.header;
+            //数据表格点击的回调方法抛出
+            this.callback.rowClick = this.param.callback.rowClick;
+            //数据请求
+            this.getData(this.url);
+        },
+        methods: {
+            getData(url){
+                let self = this;
+                //获取参数列表
+                this.$axios.post(url).then(res => {return res}).then(res=>{
+                    if(res.status == 200) {
+                        let data = res.data;
+                        if(data.code == 1){
+                            //表格参数处理
+                            self.pageCount = data.pageCount;
+                            self.pageNo = data.pageNo;
+                            //根据页内显示条数的配置对数据表格进行设置
+                            let resluts = [];
+                            for(let i in data.data){
+                                if(i >= self.pageSize) break;
+                                resluts.push(data.data[i]);
+                            }
+                            self.tableData = resluts;
+                        }
+                    }
+                }).catch(err=>{
+                    this.$message(err.toString());
+                })
+            },
+            handlerCurrentChange(e){
+                this.pageNo = e;
+                let url = this.url+"?pageNo="+e+"&pageSize="+this.pageSize;
+                this.getData(url);
+            },
         }
     }
 </script>

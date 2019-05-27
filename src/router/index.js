@@ -97,14 +97,14 @@ export default new Router({
                     component: resolve => require(['../components/page/common/select.vue'], resolve),
                     meta: {title: '下拉组件'}
                 },
-                {
+                /*{
                     path: '/custom_select',
                     component: resolve => require(['../components/page/common/custom_select.vue'], resolve),
                     meta: {title: '复杂选择组件'}
-                },
+                },*/
                 {
                     path: '/customTable',
-                    component: resolve => require(['../components/page/common/custom_table.vue'], resolve),
+                    component: resolve => require(['../components/page/common/table.vue'], resolve),
                     meta: {title: '自定义表格'}
                 },
 

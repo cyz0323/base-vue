@@ -63,7 +63,7 @@
                     {
                         icon: "el-icon-lx-copy",
                         index: 'api',
-                        title: "element-api",
+                        title: "Element API",
                         subs: [
                             {/*icon: 'el-icon-lx-cascades',*/index: 'table',title: '基础表格'},
                             {/*icon: 'el-icon-lx-copy',*/index: 'tabs',title: 'tab选项卡'},
@@ -94,7 +94,7 @@
                     {
                         icon: "el-icon-s-grid",
                         index: "zdyzj",
-                        title: "自定义组件",
+                        title: "Custom Component",
                         subs: [
                             {index: "from", title: "表单相关",
                                 subs: [
@@ -103,7 +103,7 @@
                             },
                             {index: 'custom_select',title: '复杂选择组件'},
                             {index: "fileUpload", title: "资源上传"},
-                            {index: "showImage", title: "图片回显"},
+                            {index: "showDialog", title: "弹层组件"},
                             {index: "customTable",title: "定义表格"}
                         ]
                     },
