@@ -311,10 +311,6 @@ export default{
             //全部删除按钮事件定义，datas：返回复选的所有行的数据
             handleDeleteAll(datas){
                 console.log(datas);
-            },
-            //取消选择
-            handleClearSelection(rows,e){
-                e.$refs.multipleTable.clearSelection();
             }
         }
     }

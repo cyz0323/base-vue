@@ -1,7 +1,9 @@
 /**
  * 系统底层公共方法自定义入口
  * yangzeng 20150523*/
-const defaultParam = {};
+const defaultParam = {
+    path: "http://localhost:5000"
+};
 
 /*
  * 提供简单的元素查找功能，初步定义仅支持id、class、标签本身的检索 */

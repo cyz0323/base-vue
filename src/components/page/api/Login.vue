@@ -16,7 +16,7 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <!--<p class="login-tips">Tips : 请输入正确的用户名和密码。</p>-->
+                <p class="login-tips">Tips : 欢迎您的登陆。</p>
             </el-form>
         </div>
     </div>
@@ -26,8 +26,6 @@
     export default {
         data(){
             return {
-                request_path: "http://localhost:5000/oauth/token",   //http://localhost:5000/oauth/token
-                request_msgUrl: "http://localhost:5000/user",
                 grant_type: "password",
                 client_id: "app",
                 client_secret: "app",
@@ -49,7 +47,7 @@
             //登陆方法
             submitForm(formName) {
                 let self = this;
-                let path=this.request_path+"?grant_type="+this.grant_type+"&username="+this.ruleForm.username
+                let path=this.$my.path+"/oauth/token?grant_type="+this.grant_type+"&username="+this.ruleForm.username
                     +"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
@@ -75,9 +73,9 @@
             //用户信息存储
             setDataMessage(token){
                 let self = this;
-                let path = this.request_msgUrl+"?access_token="+token;
+                let path = this.$my.path+"/user?access_token="+token;
                 this.$axios.post(path).then(res=>{
-                    localStorage.setItem("dataMessage",res.data);
+                    localStorage.setItem("dataMessage",JSON.stringify(res.data));
                 }).catch(err=>{
                     self.$message(err);
                 })
