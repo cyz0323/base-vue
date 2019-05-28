@@ -2,7 +2,8 @@
  * 系统底层公共方法自定义入口
  * yangzeng 20150523*/
 const defaultParam = {
-    path: "http://localhost:5000"
+    path: "http://localhost:5000",
+    path2: "http://localhost:8888"
 };
 
 /*

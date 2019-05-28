@@ -97,15 +97,20 @@ export default new Router({
                     component: resolve => require(['../components/page/common/select.vue'], resolve),
                     meta: {title: '下拉组件'}
                 },
-                /*{
-                    path: '/custom_select',
-                    component: resolve => require(['../components/page/common/custom_select.vue'], resolve),
-                    meta: {title: '复杂选择组件'}
-                },*/
                 {
                     path: '/customTable',
                     component: resolve => require(['../components/page/common/table.vue'], resolve),
                     meta: {title: '自定义表格'}
+                },
+                {
+                    path: '/customMsg',
+                    component: resolve => require(['../components/page/common/message.vue'], resolve),
+                    meta: {title: '消息提醒相关'}
+                },
+                {
+                    path: '/showDialog',
+                    component: resolve => require(['../components/page/common/dialog.vue'], resolve),
+                    meta: {title: '弹层定义'}
                 },
 
                 /*资产添加

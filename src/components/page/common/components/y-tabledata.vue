@@ -1,25 +1,29 @@
 <template>
     <div>
-        <el-table ref="singleTable" border :data="tableData" multiple style="width: 100%;height: 100%;"
-                  @selection-change="handlerTableSelection">
+        <el-table ref="singleTable" border :data="tableData" multiple style="width: 100%;height: 100%;" @selection-change="handlerTableSelection">
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column fixed type="index" label="序号"></el-table-column>
-            <el-table-column v-for="item in tableHeader" :sortable="isSort" fixed :prop="item.key"
-                             :label="item.value"></el-table-column>
-            <el-table-column label="操作" v-if="rowClick.length > 0">
+            <el-table-column type="expand">
+                <template slot-scope="props">
+                    <el-form label-position="left" inline class="demo-table-expand">
+                        <el-form-item v-for="t in tableHeader" :label="t.value"><span>{{t.key}}</span></el-form-item>
+                    </el-form>
+                </template>
+            </el-table-column>
+            <template v-for="item in tableHeader">
+                <el-table-column v-if="item.isShow" :sortable="isSort" fixed :prop="item.key" :label="item.value"></el-table-column>
+            </template>
+            <el-table-column label="操作" v-if="!!rowClick && rowClick.length > 0">
                 <template slot-scope="scope">
-                    <el-button size="mini" v-for="b in rowClick" @click="b.fn(scope.$index, scope.row)" :type="b.type">
-                        {{b.name}}
-                    </el-button>
+                    <el-button size="mini" v-for="b in rowClick" @click="b.fn(scope.$index, scope.row)" :type="b.type">{{b.name}}</el-button>
                 </template>
             </el-table-column>
         </el-table>
         <div class="customposition">
-            <el-pagination background layout="prev, pager, next" @current-change="handlerCurrentChange"
-                           :total="pageCount" :page-size="pageSize" :current-page="pageNo"></el-pagination>
+            <el-pagination background layout="prev, pager, next" @current-change="handlerCurrentChange" :total="pageCount" :page-size="pageSize" :current-page="pageNo"></el-pagination>
             <p class="pageSizeBar">总数：<span class="pageSizeText">{{pageCount}}</span>条</p>
         </div>
-        <div v-if="externalBtns.length > 0">
+        <div v-if="!!externalBtns && externalBtns.length > 0">
             <el-button v-for="t in externalBtns" @click="t.fn(selectionChanges)" :type="t.type">{{t.name}}</el-button>
         </div>
     </div>
@@ -42,23 +46,26 @@
                 externalBtns: [],   //表格全局定义
                 selectionChanges: [],//选中的数据
                 isSort: false,      //是否排序的指定,
-                showFrom: false,
                 currentChange: null,//分页参数发生改变时触发
             }
         },
         created() {
             //设置参数
-            this.isSort = this.param.isSort;
+            this.isSort = !!this.param.isSort ? this.param.isSort : false;
             this.url = this.param.url;
             this.pageSize = !!this.param.pageSize ? this.param.pageSize : 10;
             //表头的设置
             this.tableHeader = this.param.header;
             //行添加点击按钮
-            this.rowClick = this.param.rowBtns;
+            this.rowClick = !!this.param.rowBtns ? this.param.rowBtns : [] ;
             //定于表格全局按钮
-            this.externalBtns = this.param.externalBtns;
+            this.externalBtns = !!this.param.externalBtns ? this.param.externalBtns : [];
             //数据请求
-            this.getData(this.url);
+            if(!!this.param.data){
+                this.tableData = this.param.data;
+            }else{
+                this.getData(this.url);
+            }
         },
         methods: {
             getData(url) {
@@ -99,23 +106,7 @@
 </script>
 
 <style scoped>
-    .customposition {
-        text-align: right;
-        margin: 20px 0;
-        position: relative;
-    }
-
-    .pageSizeBar {
-        width: 200px;
-        position: absolute;
-        top: 5px;
-        left: 10px;
-        text-align: left;
-        font-weight: bold;
-    }
-
-    .pageSizeText {
-        font-weight: normal;
-        margin-right: 10px;
-    }
+    .customposition {text-align: right;margin: 20px 0;position: relative;}
+    .pageSizeBar {width: 200px;position: absolute;top: 5px;left: 10px;text-align: left;font-weight: bold;}
+    .pageSizeText {font-weight: normal;margin-right: 10px;}
 </style>

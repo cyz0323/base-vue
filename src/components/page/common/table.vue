@@ -144,8 +144,8 @@ export default{
                     </div>
                 </el-tab-pane>
 
-                <!-- *********************************************整合表单操作按钮的表格********************************************** -->
-                <el-tab-pane label="整合表单操作按钮表格" name="thread-code">
+                <!-- *********************************************展开行的表格********************************************** -->
+                <el-tab-pane label="展开行表格" name="thread-code">
                     <div class="demoModel">
                         <span class="head-title">描述：</span>
                         <p class="title">
@@ -164,7 +164,7 @@ export default{
                         <div class="code">
                             <span class="code-msg">html</span>
                             <div class="code-main">
-                                &lt;y-btns-table :data="tableData2"&gt;&lt;/y-btns-table&gt;
+                                &lt;y-tabledata :data="tableData2"&gt;&lt;/y-tabledata&gt;
                             </div>
                             <span class="code-msg">script</span>
                             <div class="code-main">
@@ -172,43 +172,48 @@ export default{
 export default{
     data(){
         return {
-            tableData2: {
-                url: "http://localhost:8888/zcgl/xc",       //数据请求地址
-                pageSize: 10,   //每页条数
+            tableData3: {
+                url: this.$my.path2+"/zcgl/xc",       //数据请求地址
+                pageSize: 10,
                 isSort: true,   //是否支持排序
-                header: [       //表头定义
-                    {key: "col1",value: "日期"},
-                    {key: "col2",value: "姓名"},
-                    {key: "col3", value: "省份"},
-                    {key: "col4",value: "时区"},
-                    {key: "col5",value: "地址"},
-                    {key: "col5", value: "邮编"}
+                header: [
+                    {key: "id",value: "商品id",isShow: true},
+                    {key: "name",value: "名称",isShow: true},
+                    {key: "category",value: "描述",isShow: false},
+                    {key: "desc",value: "产地",isShow: false},
+                    {key: "address", value: "地址",isShow: true},
+                    {key: "shop",value: "店名",isShow: true},
+                    {key: "shopId",value: "商品编号",isShow: false},
                 ],
-                rowBtns: [      //当前行的操作按钮定义
+                rowBtns: [
                     {name: "编辑", fn: this.handleEdit,type: "default"},
                     {name: "删除", fn: this.handleDelete, type:"danger"}
                 ],
-                externalBtns: [     //表格全局操作按钮的定义
-                    {name: "全部删除", fn: this.handleDeleteAll, type: "danger"}
-                ],
-                callback: {
-                    rowClick: this.handlerClickRows
-                }
+                data: [
+                    {id: '12987122',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                        address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                    }, {
+                        id: '12987123',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                        address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                    }, {
+                        id: '12987125',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                        address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                    }, {
+                        id: '12987126',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                        address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                    }
+                ]
             }
         }
     },
     methods: {
-        //单行编辑按钮的触发，index：当前行下标以0开始，row：当前行的数据
+        //单行编辑按钮的触发，index：当前行下表以0开始，row：当前行的数据
         handleEdit(index, row) {
             console.log(row);
         },
-        //单行删除按钮的触发，index：当前行的下标以0开始，row：当前行的数据
+        //单行删除按钮的触发，index：当前行的下表以0开始，row：当前行的数据
         handleDelete(index, row) {
             console.log(row);
-        },
-        //全部删除按钮事件定义，datas：返回复选的所有行的数据
-        handleDeleteAll(datas){
-            console.log(datas);
         }
     }
 }
@@ -230,7 +235,7 @@ export default{
                 title: "自定义数据表格",
                 activeName: 'first-ele',
                 tableData: {
-                    url: "http://localhost:8888/zcgl/xc",       //数据请求地址
+                    url: this.$my.path2+"/zcgl/xc",       //数据请求地址
                     pageSize: 10,
                     isSort: true,   //是否支持排序
                     header: [
@@ -246,7 +251,7 @@ export default{
                     }
                 },
                 tableData2: {
-                    url: "http://localhost:8888/zcgl/xc",       //数据请求地址
+                    url: this.$my.path2+"/zcgl/xc",       //数据请求地址
                     pageSize: 10,
                     isSort: true,   //是否支持排序
                     header: [
@@ -269,24 +274,35 @@ export default{
                     }
                 },
                 tableData3: {
-                    url: "http://localhost:8888/zcgl/xc",       //数据请求地址
+                    url: this.$my.path2+"/zcgl/xc",       //数据请求地址
                     pageSize: 10,
                     isSort: true,   //是否支持排序
-                    showFrom: true,
                     header: [
-                        {key: "col1",value: "日期",type: "text"},
-                        {key: "col2",value: "姓名",type: "text"},
-                        {key: "col3", value: "省份",type: "text"},
-                        {key: "col4",value: "时区",type: "text"},
-                        {key: "col5",value: "地址",type: "text"},
-                        {key: "col5", value: "邮编",type: "text"}
+                        {key: "id",value: "商品id",isShow: true},
+                        {key: "name",value: "名称",isShow: true},
+                        {key: "category",value: "描述",isShow: false},
+                        {key: "desc",value: "产地",isShow: false},
+                        {key: "address", value: "地址",isShow: true},
+                        {key: "shop",value: "店名",isShow: true},
+                        {key: "shopId",value: "商品编号",isShow: false},
                     ],
                     rowBtns: [
                         {name: "编辑", fn: this.handleEdit,type: "default"},
                         {name: "删除", fn: this.handleDelete, type:"danger"}
                     ],
-                    externalBtns: [
-                        {name: "全部删除", fn: this.handleDeleteAll, type: "danger"}
+                    data: [
+                        {id: '12987122',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                        }, {
+                            id: '12987123',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                        }, {
+                            id: '12987125',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                        }, {
+                            id: '12987126',name: '好滋好味鸡蛋仔',category: '江浙小吃、小吃零食',desc: '荷兰优质淡奶，奶香浓而不腻',
+                            address: '上海市普陀区真北路',shop: '王小虎夫妻店',shopId: '10333'
+                        }
                     ],
                     callback: {
                         rowClick: this.handlerClickRows

@@ -57,7 +57,6 @@
                                 localStorage.setItem('user_name',self.ruleForm.username);
                                 localStorage.setItem('user_token',_data.access_token);
                                 self.setDataMessage(_data.access_token);
-                                self.$router.push("/");
                             }else{
                                 this.$message(_data.message);
                             }
@@ -72,12 +71,11 @@
             },
             //用户信息存储
             setDataMessage(token){
-                let self = this;
-                let path = this.$my.path+"/user?access_token="+token;
-                this.$axios.post(path).then(res=>{
-                    localStorage.setItem("dataMessage",JSON.stringify(res.data));
+                this.$axios.post(this.$my.path+"/user?access_token="+token).then(res=>{
+                    localStorage.setItem("userinfo",JSON.stringify(res.data));
+                    this.$router.push("/");
                 }).catch(err=>{
-                    self.$message(err);
+                    console.log(err);
                 })
             }
         },
