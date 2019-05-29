@@ -9,8 +9,6 @@ import qs from 'qs';    //json转字符串操作
 //自定义组件定义
 import yTable from './components/page/common/components/y-table';
 import ySelect from './components/page/common/components/y-select';
-import yBtnsTable from './components/page/common/components/y-btns-table';
-import yTabledata from './components/page/common/components/y-tabledata';
 
 import defaultParam from './assets/defalut.js';
 import { messages } from './components/common/i18n';
@@ -30,8 +28,6 @@ Vue.prototype.$my = defaultParam;
 /*自定义组件声明*/
 Vue.component("y-table", yTable);
 Vue.component("y-select", ySelect);
-Vue.component("y-btns-table", yBtnsTable);
-Vue.component("y-tabledata",yTabledata);
 
 const i18n = new VueI18n({locale: 'zh',messages});
 

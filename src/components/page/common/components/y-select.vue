@@ -7,7 +7,7 @@
             <el-select filterable v-if="!checkFlg" clearable  v-model="value" placeholder="请选择" @change="change">
                 <el-option v-for="item in options" :key="item.key" :label="item.value" :value="item.key"></el-option>
             </el-select>
-            <el-select filterable v-else v-model="value" filterable clearable  multiple placeholder="请选择" @change="change">
+            <el-select filterable v-else v-model="value" clearable  multiple placeholder="请选择" @change="change">
                 <el-option v-for="item in options" :key="item.key" :label="item.value" :value="item.key"></el-option>
             </el-select>
         </template>
@@ -15,7 +15,7 @@
             <el-select v-if="!checkFlg" clearable  v-model="value" placeholder="请选择" @change="change">
                 <el-option v-for="item in options" :key="item.key" :label="item.value" :value="item.key"></el-option>
             </el-select>
-            <el-select v-else v-model="value" filterable clearable  multiple placeholder="请选择" @change="change">
+            <el-select v-else v-model="value" clearable  multiple placeholder="请选择" @change="change">
                 <el-option v-for="item in options" :key="item.key" :label="item.value" :value="item.key"></el-option>
             </el-select>
         </template>
@@ -36,8 +36,7 @@
             }
         },
         created() {
-            //console.log(isCheck);
-            console.log(this.search);
+            //console.log(this.hasOwnProperty("isCheck"));
         }/*,
         mounted() {
             this.list = this.states.map(item => {

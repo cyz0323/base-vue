@@ -20,7 +20,6 @@
                             3、isCheck：是否多选的指定，true/false<br/>
                             4、isChange：参数改变的触发函数<br/>
                             注意：参数的值必须定义在当前页面data中进行了定义，若数据为后台请求，则在页面加载时对下拉组件数据进行初始化定义,若页面为多下拉选则需import引入和初始化多次
-
                         </p>
                         <span class="head-title">样例：</span>
                         <div class="ele" style="padding-left: 30px;">
@@ -35,28 +34,28 @@
                             <span class="code-msg">script</span>
                             <div class="code-main">
 <pre>
-    export default {
-        data(){
-            return {
-                refOptions: [       //下拉组件数据
-                    {key: "col1", value: "列1"},
-                    {key: "col2", value: "列2"},
-                    {key: "col3", value: "列3"},
-                    {key: "col4", value: "列4"},
-                    {key: "col5", value: "列5"},
-                    {key: "col6", value: "列6"},
-                    {key: "col7", value: "列7"},
-                    {key: "col8", value: "列8"}
-                ],
-                enableValue: "col1"     //下拉默认参数指定
-            }
-        },
-        methods: {
-            handleChange(err){      //参数改变触发
-                this.$message(err);
-            }
+export default {
+    data(){
+        return {
+            refOptions: [       //下拉组件数据
+                {key: "col1", value: "列1"},
+                {key: "col2", value: "列2"},
+                {key: "col3", value: "列3"},
+                {key: "col4", value: "列4"},
+                {key: "col5", value: "列5"},
+                {key: "col6", value: "列6"},
+                {key: "col7", value: "列7"},
+                {key: "col8", value: "列8"}
+            ],
+            enableValue: "col1"     //下拉默认参数指定
+        }
+    },
+    methods: {
+        handleChange(err){      //参数改变触发
+            this.$message(err);
         }
     }
+}
 </pre>
                             </div>
                         </div>
@@ -91,29 +90,29 @@
                             <span class="code-msg">script</span>
                             <div class="code-main">
 <pre>
-    export default {
-        data(){
-            return {
-                refOptions: [       //下拉组件数据
-                    {key: "col1", value: "列1"},
-                    {key: "col2", value: "列2"},
-                    {key: "col3", value: "列3"},
-                    {key: "col4", value: "列4"},
-                    {key: "col5", value: "列5"},
-                    {key: "col6", value: "列6"},
-                    {key: "col7", value: "列7"},
-                    {key: "col8", value: "列8"}
-                ],
-                enableValue2: ["col1","col2"],,     //下拉默认参数指定
-                isCheck: true
-            }
-        },
-        methods: {
-            handleChange(err){      //参数改变触发
-                 this.$message(e.toString())
-            }
+export default {
+    data(){
+        return {
+            refOptions: [       //下拉组件数据
+                {key: "col1", value: "列1"},
+                {key: "col2", value: "列2"},
+                {key: "col3", value: "列3"},
+                {key: "col4", value: "列4"},
+                {key: "col5", value: "列5"},
+                {key: "col6", value: "列6"},
+                {key: "col7", value: "列7"},
+                {key: "col8", value: "列8"}
+            ],
+            enableValue2: ["col1","col2"],,     //下拉默认参数指定
+            isCheck: true
+        }
+    },
+    methods: {
+        handleChange(err){      //参数改变触发
+             this.$message(e.toString())
         }
     }
+}
 </pre>
                             </div>
                         </div>
@@ -139,41 +138,43 @@
                         </p>
                         <span class="head-title">样例：</span>
                         <div class="ele">
+                            <y-select :selOptions="refOptions" :enableValue="enableValue" :isSearch="isSearch" :isCheck="!isCheck" :isChange="handleChange2"></y-select>
                             <y-select :selOptions="refOptions" :enableValue="enableValue" :isSearch="isSearch" :isCheck="isCheck" :isChange="handleChange2"></y-select>
                         </div>
                         <span class="head-title">代码：</span>
                         <div class="code">
                             <span class="code-msg">html</span>
                             <div class="code-main">
+                                &lt;y-select :selOptions="refOptions" :enableValue="enableValue" :isSearch="isSearch" :isCheck="!isCheck" :isChange="handleChange2"&gt;&lt;/y-select&gt;<br/>
                                 &lt;y-select :selOptions="refOptions" :enableValue="enableValue" :isSearch="isSearch" :isCheck="isCheck" :isChange="handleChange2"&gt;&lt;/y-select&gt;
                             </div>
                             <span class="code-msg">script</span>
                             <div class="code-main">
 <pre>
-    export default {
-        data(){
-            return {
-                refOptions: [       //下拉组件数据
-                    {key: "col1", value: "列1"},
-                    {key: "col2", value: "列2"},
-                    {key: "col3", value: "列3"},
-                    {key: "col4", value: "列4"},
-                    {key: "col5", value: "列5"},
-                    {key: "col6", value: "列6"},
-                    {key: "col7", value: "列7"},
-                    {key: "col8", value: "列8"}
-                ],
-                enableValue2: ["col1","col2"],,     //下拉默认参数指定
-                isCheck: true,    //是否具有多选
-                isSearch: true    //是否具有搜索
-            }
-        },
-        methods: {
-            handleChange(err){      //参数改变触发
-                 this.$message(e.toString())
-            }
+export default {
+    data(){
+        return {
+            refOptions: [       //下拉组件数据
+                {key: "col1", value: "列1"},
+                {key: "col2", value: "列2"},
+                {key: "col3", value: "列3"},
+                {key: "col4", value: "列4"},
+                {key: "col5", value: "列5"},
+                {key: "col6", value: "列6"},
+                {key: "col7", value: "列7"},
+                {key: "col8", value: "列8"}
+            ],
+            enableValue2: ["col1","col2"],,     //下拉默认参数指定
+            isCheck: true,    //是否具有多选
+            isSearch: true    //是否具有搜索
+        }
+    },
+    methods: {
+        handleChange(err){      //参数改变触发
+             this.$message(e.toString())
         }
     }
+}
 </pre>
                             </div>
                         </div>

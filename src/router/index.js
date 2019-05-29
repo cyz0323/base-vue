@@ -112,7 +112,21 @@ export default new Router({
                     component: resolve => require(['../components/page/common/dialog.vue'], resolve),
                     meta: {title: '弹层定义'}
                 },
-
+                {
+                    path: '/tree',
+                    component: resolve => require(['../components/page/common/tree.vue'], resolve),
+                    meta: {title: '树形结构'}
+                },
+                {
+                    path: '/input',
+                    component: resolve => require(['../components/page/common/input.vue'], resolve),
+                    meta: {title: '输入框'}
+                },
+                {
+                    path: '/dateTimePicker',
+                    component: resolve => require(['../components/page/common/dateTimePicker.vue'], resolve),
+                    meta: {title: '时间日期组件'}
+                },
                 /*资产添加
                 {
                     path: '/zctj',
