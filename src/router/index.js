@@ -132,6 +132,17 @@ export default new Router({
                     component: resolve => require(['../components/page/common/from.vue'], resolve),
                     meta: {title: '表单'}
                 },
+                {
+                    path: '/fileUpload',
+                    component: resolve => require(['../components/page/common/fileUpload.vue'], resolve),
+                    meta: {title: '资源上传'}
+                },
+                {
+                    path: '/Cascader',
+                    component: resolve => require(['../components/page/common/cascade.vue'], resolve),
+                    meta: {title: '级联选择器'}
+                },
+
                 /*资产添加
                 {
                     path: '/zctj',

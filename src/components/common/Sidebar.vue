@@ -107,7 +107,7 @@
                                     {index: 'input',title: '输入框'},
                                     {index: 'select',title: '定义下拉组件'},
                                     {index: "dateTimePicker",title: "时间日期组件"},
-                                    {index: "cascader ",title: "级联选择器"},
+                                    {index: "Cascader", title: "级联选择器"},
                                     {index: "fileUpload", title: "资源上传"},
                                     {index: 'from',title: '表单'}
                                 ]
@@ -115,7 +115,7 @@
                             {index: 'tree',title: '树形控件'},
                             {index: "showDialog", title: "Dialog 弹层"},
                             {index: "customTable",title: "定义表格"},
-                            {index: "customMsg",title: "消息提示窗"}
+                            {index: "customMsg",title: "消息提示窗"},
                         ]
                     },
                 ]
