@@ -86,7 +86,7 @@
                                     {index: 'form',title: '基本表单'},
                                     {index: 'editor',title: '富文本编辑器'},
                                     {index: 'markdown',title: 'markdown编辑器'},
-                                    {index: 'upload',title: '文件上传'}
+                                    {index: 'upload',title: '文件上传'},
                                 ]
                             },
                             {index: '7',title: '错误处理',
@@ -109,6 +109,7 @@
                                     {index: "dateTimePicker",title: "时间日期组件"},
                                     {index: "cascader ",title: "级联选择器"},
                                     {index: "fileUpload", title: "资源上传"},
+                                    {index: 'from',title: '表单'}
                                 ]
                             },
                             {index: 'tree',title: '树形控件'},

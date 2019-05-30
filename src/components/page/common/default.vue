@@ -4,7 +4,7 @@
             <span>数据表格</span>
         </div>
         <div class="text item">
-            <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tabs v-model="activeName">
                 <!-- *********************************************加单数据表格********************************************** -->
                 <el-tab-pane label="简单数据表格" name="first-ele">
                     <div class="demoModel">

@@ -127,6 +127,11 @@ export default new Router({
                     component: resolve => require(['../components/page/common/dateTimePicker.vue'], resolve),
                     meta: {title: '时间日期组件'}
                 },
+                {
+                    path: '/from',
+                    component: resolve => require(['../components/page/common/from.vue'], resolve),
+                    meta: {title: '表单'}
+                },
                 /*资产添加
                 {
                     path: '/zctj',
