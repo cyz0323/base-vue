@@ -3,7 +3,8 @@
  * yangzeng 20150523*/
 const defaultParam = {
     path: "http://localhost:5000",
-    path2: "http://localhost:8888"
+    path2: "http://localhost:8888",
+    path3: "http://10.231.132.130:8082"
 };
 
 /*
@@ -29,19 +30,35 @@ defaultParam.hasUser = function(){
 };
 
 //对用户信息的存储根据用户的token获取当前用户的一本信息
-defaultParam.setUserData = function(url){
-    let access_token = localStorage.getItem("user_token");
-    if(!!access_token){
-        let path = url+"?access_token="+access_token;
-        this.$axios.post(path).then(res=>{
-          console.log(res);
-        }).catch(err=>{
-            console.log(err);
-        });
-    }else{
-        this.logout();
+defaultParam.setUserData = function(){
+    let token = localStorage.getItem('user_token');
+    //let path = this.path +"/user?access_token="+token;
+    let path = this.path +"/user?access_token="+token;
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST",path,true);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    //xmlhttp.send("user="+token);
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+            console.log(xmlhttp.responseText);
+        }
     }
+    /*this.$axios.post(path).then(res=>{
+        localStorage.setItem("userinfo",JSON.stringify(res.data));
+        this.$router.push("/");
+    }).catch(err=>{
+        console.log(err);
+    })*/
 };
+
+//成功提示消息
+defaultParam.success = function(e){
+    this.$message("aaaa");
+};
+//退出登陆
 defaultParam.logout = function(){
     localStorage.clear();
     this.$router.push("/login");

@@ -90,7 +90,7 @@ export default{
                         <div class="code">
                             <span class="code-msg">html</span>
                             <div class="code-main">
-                                &lt;y-table :data="tableData2" :pagination="showPagination""&gt;&lt;/y-table&gt;
+                                &lt;y-table :data="tableData2" :pagination="showPagination"&gt;&lt;/y-table&gt;
                             </div>
                             <span class="code-msg">script</span>
                             <div class="code-main">

@@ -126,8 +126,6 @@
             }
             //全局操作按钮的过滤
             if(this.isArray("externalBtns")) {
-                //全局按钮操作默认开启复选栏
-                this.isCheck = true;
                 this.externalBtns = this.param.externalBtns;
             }
             //数据请求
@@ -211,7 +209,7 @@
     .customposition{text-align: right;margin: 20px 0;position: relative;}
     .pageSizeBar{width: 200px;position: absolute; top: 5px;left: 10px;text-align: left;font-weight: bold;}
     .pageSizeText{font-weight: normal;margin-right: 10px;}
-    .global_btns_list{margin-top: 15px; margin-bottom: 15px;}
+    .global_btns_list{margin-bottom: 15px;}
     .demo-table-expand>div{display: inline-block;width: 45%;}
     .el-form--inline .el-form-item__label{font-weight: bold !important;}
 </style>

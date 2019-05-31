@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import axios from 'axios';
+//import $ from 'jquery'
 import ElementUI from 'element-ui';
 import VueI18n from 'vue-i18n';
 import VueResource from 'vue-resource';
@@ -25,6 +26,7 @@ Vue.use(VueResource);
 Vue.prototype.$axios = axios;
 Vue.prototype.$qs = qs;
 Vue.prototype.$my = defaultParam;
+//Vue.prototype.$ = $;
 /*自定义组件声明*/
 Vue.component("y-table", yTable);
 Vue.component("y-select", ySelect);

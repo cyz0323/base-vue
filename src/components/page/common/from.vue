@@ -161,19 +161,19 @@ export default{
                             <span class="code-msg">html</span>
                             <div class="code-main">
 <pre>
-&lt;el-form :inline="true" :model="formInline" class="demo-form-inline"&gt;<br/>
-    &lt;el-form-item label="审批人"&gt;<br/>
-        &lt;el-input v-model="formInline.user" placeholder="审批人"&gt;&lt;/el-input&gt;<br/>
-    &lt;/el-form-item&gt;<br/>
-    &lt;el-form-item label="活动区域"&gt;<br/>
-        &lt;el-select v-model="formInline.region" placeholder="活动区域"&gt;<br/>
-            &lt;el-option label="区域一" value="shanghai"&gt;&lt;/el-option&gt;<br/>
-            &lt;el-option label="区域二" value="beijing"&gt;&lt;/el-option&gt;<br/>
-        &lt;/el-select&gt;<br/>
-    &lt;/el-form-item&gt;<br/>
-    &lt;el-form-item&gt;<br/>
-        &lt;el-button type="primary" @click="onSubmit"&gt;查询&lt;/el-button&gt;<br/>
-    &lt;/el-form-item&gt;<br/>
+&lt;el-form :inline="true" :model="formInline" class="demo-form-inline"&gt;
+    &lt;el-form-item label="审批人"&gt;
+        &lt;el-input v-model="formInline.user" placeholder="审批人"&gt;&lt;/el-input&gt;
+    &lt;/el-form-item&gt;
+    &lt;el-form-item label="活动区域"&gt;
+        &lt;el-select v-model="formInline.region" placeholder="活动区域"&gt;
+            &lt;el-option label="区域一" value="shanghai"&gt;&lt;/el-option&gt;
+            &lt;el-option label="区域二" value="beijing"&gt;&lt;/el-option&gt;
+        &lt;/el-select&gt;
+    &lt;/el-form-item&gt;
+    &lt;el-form-item&gt;
+        &lt;el-button type="primary" @click="onSubmit"&gt;查询&lt;/el-button&gt;
+    &lt;/el-form-item&gt;
 &lt;/el-form&gt;
 </pre>
                             </div>

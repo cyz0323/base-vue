@@ -56,6 +56,7 @@
                             if(_data.status == 0){
                                 localStorage.setItem('user_name',self.ruleForm.username);
                                 localStorage.setItem('user_token',_data.access_token);
+                                //this.$my.setUserData();
                                 self.setDataMessage(_data.access_token);
                             }else{
                                 this.$message(_data.message);
