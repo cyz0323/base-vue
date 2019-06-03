@@ -43,20 +43,23 @@
                 }
             }
         },
+        created(){
+            console.log(window.localStorage.getItem("user_token"));
+        },
         methods: {
             //登陆方法
             submitForm(formName) {
                 let self = this;
-                let path=this.$my.path+"/oauth/token?grant_type="+this.grant_type+"&username="+this.ruleForm.username
+                let path=this.$my.path_login+"/oauth/token?grant_type="+this.grant_type+"&username="+this.ruleForm.username
                     +"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$axios.post(path).then( res =>{
+                        //"http://10.231.128.189:5000/oauth/token?grant_type=password&username=HD_OUYANGH&password=1&client_id=app&client_secret=app"
+                       this.$axios.post(path).then( res =>{
                             let _data = res.data;
                             if(_data.status == 0){
                                 localStorage.setItem('user_name',self.ruleForm.username);
                                 localStorage.setItem('user_token',_data.access_token);
-                                //this.$my.setUserData();
                                 self.setDataMessage(_data.access_token);
                             }else{
                                 this.$message(_data.message);
@@ -72,7 +75,7 @@
             },
             //用户信息存储
             setDataMessage(token){
-                this.$axios.post(this.$my.path+"/user?access_token="+token).then(res=>{
+                this.$axios.post(this.$my.path_login+"/user?access_token="+token).then(res=>{
                     localStorage.setItem("userinfo",JSON.stringify(res.data));
                     this.$router.push("/");
                 }).catch(err=>{

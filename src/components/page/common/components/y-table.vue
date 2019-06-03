@@ -38,9 +38,10 @@
                <template v-for="item in tableHeader">
                    <el-table-column v-if="item.display" :sortable="isSort" fixed :prop="item.key" :label="item.value"></el-table-column>
                </template>
-               <el-table-column label="操作" v-if="rowBtns.length > 0">
+               <el-table-column label="操作" v-if="rowBtns.length > 0" :width="colum_width">
                    <template slot-scope="scope">
-                       <el-button size="mini" v-for="b in rowBtns" @click="b.fn(scope.$index, scope.row)" :type="b.type">{{b.name}}</el-button>
+                       <el-link v-for="b in rowBtns" @click="b.fn(scope.$index, scope.row)" :type="b.type" :icon="b.icon">{{b.name}}</el-link>
+                       <!--<el-button size="mini" v-for="b in rowBtns" @click="b.fn(scope.$index, scope.row)" :type="b.type">{{b.name}}</el-button>-->
                    </template>
                </el-table-column>
            </el-table>
@@ -58,9 +59,10 @@
                <template v-for="item in tableHeader">
                    <el-table-column v-if="item.display" :sortable="isSort" fixed :prop="item.key" :label="item.value"></el-table-column>
                </template>
-               <el-table-column label="操作" v-if="rowBtns.length > 0">
+               <el-table-column label="操作" v-if="rowBtns.length > 0" :width="colum_width">
                    <template slot-scope="scope">
-                       <el-button size="mini" v-for="b in rowBtns" @click="b.fn(scope.$index, scope.row)" :type="b.type">{{b.name}}</el-button>
+                       <el-link v-for="b in rowBtns" @click="b.fn(scope.$index, scope.row)" :type="b.type" :icon="b.icon">{{b.name}}</el-link>
+                      <!-- <el-button size="mini" v-for="b in rowBtns" @click="b.fn(scope.$index, scope.row)" :type="b.type">{{b.name}}</el-button>-->
                    </template>
                </el-table-column>
            </el-table>
@@ -78,6 +80,7 @@
         data(){
             return {
                 e: this,
+                colum_width: "",
                 url: "",            //数据请求地址
                 param: this.data,   //参数列表
                 isSort: false,      //是否排序的指定
@@ -117,6 +120,7 @@
             //行操作按钮处理，若存在行操作按钮则需要禁用行点击的回调事件
             if(this.isArray("rowBtns")){
                 this.rowBtns = this.param.rowBtns;
+                this.colum_width = this.rowBtns.length * 70 + "px";
             }else{
                 //数据表格点击的回调方法抛出
                 if(this.param.hasOwnProperty("rowCallback") && typeof this.param.rowCallback == 'function'){
@@ -212,4 +216,5 @@
     .global_btns_list{margin-bottom: 15px;}
     .demo-table-expand>div{display: inline-block;width: 45%;}
     .el-form--inline .el-form-item__label{font-weight: bold !important;}
+    .custom_btns{margin-right: 10px;}
 </style>

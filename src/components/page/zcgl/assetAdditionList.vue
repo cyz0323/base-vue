@@ -60,11 +60,11 @@
                     {key: "col12", value: "供应商"}
                 ],
                 rowBtns: [      //局部按钮
-                    {name: "详情", fn: this.handleShwoView,type: "default"},
+                    {name: "详情", fn: this.handleShwoView,type: "primary", icon: "el-icon-view"},
+                    {name: "修改", fn: this.handleUpdate, type: "primary",icon: "el-icon-edit"}
                 ],
                 externalBtns: [     //全局按钮
                     {name: "新增", fn: this.handleAddData, type: "primary"},
-                    {name: "修改", fn: this.handleAddData, type: "primary"},
                     {name: "删除", fn: this.handleDelData, type: "danger"}
                 ]
             };
@@ -72,11 +72,11 @@
                 isSearch: false,        //对数据表格检索的控制
                 showPagination: true,   //分页显示与否默认显示
                 formInline: formInline, //顶部检索表单定义
-                tableData: tableData    //表格数据定义
+                tableData: tableData,    //表格数据定义
             }
         },
         created(){
-          this.getDataList();
+            this.getDataList();
         },
         watch: {
             isSearch: function(){
@@ -94,12 +94,7 @@
         methods: {
             //列表数据请求
             getDataList(){
-                let _url = this.$my.path3+"/amslist";
-                this.$axios.post(_url).then(res=>{
-                    console.log(res);
-                }).catch(err=>{
-                    console.log(err);
-                })
+
             },
             onSubmit() {
                 this.isSearch = true;
@@ -123,7 +118,10 @@
                     duration: 2000
                 });
             },
-
+            //表格数据修改
+            handleUpdate(data){
+                console.log(data);
+            }
         }
     }
 </script>
