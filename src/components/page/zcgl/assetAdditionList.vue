@@ -4,25 +4,25 @@
         <!--表单检索区域内容定义-->
         <el-form :inline="true" :model="formInline" class="demo-form-inline">
             <el-form-item label="资产编号">
-                <el-input v-model="formInline.col1" placeholder="资产编号"></el-input>
+                <el-input v-model="formInline.col1" placeholder="资产编号" clearable></el-input>
             </el-form-item>
             <el-form-item label="资产名称">
-                <el-input v-model="formInline.col2" placeholder="资产名称"></el-input>
+                <el-input v-model="formInline.col2" placeholder="资产名称" clearable></el-input>
             </el-form-item>
             <el-form-item label="资产类别">
-                <el-input v-model="formInline.col6" placeholder="资产类别"></el-input>
+                <el-input v-model="formInline.col6" placeholder="资产类别" clearable></el-input>
             </el-form-item>
             <el-form-item label="资产地点">
-                <el-input v-model="formInline.col7" placeholder="资产地点"></el-input>
+                <el-input v-model="formInline.col7" placeholder="资产地点" clearable></el-input>
             </el-form-item>
             <el-form-item label="使用人">
-                <el-input v-model="formInline.user" placeholder="使用人"></el-input>
+                <el-input v-model="formInline.user" placeholder="使用人" clearable></el-input>
             </el-form-item>
             <el-form-item label="资产状态">
-                <el-input v-model="formInline.col9" placeholder="资产状态"></el-input>
+                <el-input v-model="formInline.col9" placeholder="资产状态" clearable></el-input>
             </el-form-item>
             <el-form-item label="供应商名称">
-                <el-input v-model="formInline.col12" placeholder="供应商名称"></el-input>
+                <el-input v-model="formInline.col12" placeholder="供应商名称" clearable></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="onSubmit">查询</el-button>
@@ -101,12 +101,16 @@
             },
             //详情查看
             handleShwoView(index, row) {
-                console.log(row);
+                this.$refs["dialog"].display = true;
+                this.$refs["dialog"].use_type = 3;
+                this.$refs["dialog"].isDisabled = true;
             },
             //添加按钮事件定义，datas：返回复选的所有行的数据
             handleAddData(){
                 //打开新标签页的形式 this.$router.push("/asset-addition-add");
                 this.$refs["dialog"].display = true;
+                this.$refs["dialog"].use_type = 1;
+                this.$refs["dialog"].isDisabled = false;
             },
             //数据删除操作
             handleDelData(data){
@@ -120,7 +124,9 @@
             },
             //表格数据修改
             handleUpdate(data){
-                console.log(data);
+                this.$refs["dialog"].display = true;
+                this.$refs["dialog"].use_type = 2;
+                this.$refs["dialog"].isDisabled = false;
             }
         }
     }

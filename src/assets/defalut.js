@@ -1,6 +1,6 @@
 /**
  * 系统底层公共方法自定义入口
- * yangzeng 20150523*/
+ * yangzeng 20190523*/
 const defaultParam = {
     /* 测试地址 */
     // path_login: "http://10.231.128.189:5000",
@@ -24,43 +24,56 @@ defaultParam.find = function(e){
         return document.getElementsByTagName(e);
     }
 };
-//针对用户是否登陆的判断
-defaultParam.hasUser = function(){
-    let token = localStorage.getItem("user_token");
-    if(!!token) return true;
-    else {
-        this.logout();
-    }
-};
 
 //对用户信息的存储根据用户的token获取当前用户的一本信息
 defaultParam.setUserData = function(){
-    let token = localStorage.getItem('user_token');
-    //let path = this.path +"/user?access_token="+token;
-    let path = this.path +"/user?access_token="+token;
-    let xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST",path,true);
-    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    //xmlhttp.send("user="+token);
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-            console.log(xmlhttp.responseText);
-        }
-    }
-};
 
-//退出登陆
-defaultParam.logout = function(){
-    window.localStorage.clear();
-    this.$router.push("/login");
 };
-
 
 /**
- * 自定义请求，对token 包含对token的验证
+ * 退出登陆
+ * @param self  调用环境本身
+ */
+defaultParam.logout = function(self){
+    window.localStorage.clear();
+    self.$router.push("/login");
+};
+
+/**
+ * 自定义get请求，包含对token的验证
+ * @param self  当前请求发起的环境对象
+ * @param url   请求发送的地址
+ * @param successCallback   请求成功的回调方法
+ * @param errorCallback 请求异常的回调方法
+ * @Author yangzeng 20190604
+ */
+defaultParam.get = function(self,url,successCallback,errorCallback){
+    let access_token = window.localStorage.getItem("user_token"),_this = this;
+    //判断token是否存在若不存在则需要重新进行登陆操作
+    if(!!access_token){     //登陆成功
+        let opts = {
+            method: "get",     //请求类型
+            url: url+"&access_token="+access_token,     //请求地址处理
+        };
+        axios(opts).then(res=>{
+            //返回参数结果判断
+            if(this.isSuccess(res.status)){
+                let _data= res.data;
+                if(typeof _data != "object") return _this.errorMsg(self, "请返回正确格式的参数！");        //验证数据本身是否按照指定格式传递
+                if(_data.status == 0)   successCallback(_data.message);     //对成功回调的调用
+                else   _this.errorMsg(self, _data.message);
+            }
+        }).catch(err=>{
+            if(!!errorCallback)  errorCallback(err);
+            else    _this.errorMsg(self, "参数请求异常！"+err.toString());
+        });
+    }else{
+        window.localStorage.clear();    //清除所有缓存
+        self.$router.push("/login");
+    }
+};
+/**
+ * 自定义post请求，对token 包含对token的验证
  * @param self  当前调用的环境对象本身
  * @param url   请求发送地址
  * @param data  请求附带参数
