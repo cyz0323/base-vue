@@ -65,23 +65,20 @@
                 </span>
                 <span>
                     <el-form-item label="是否研发资产">
-                        <!--<el-input v-model="from.ATTRIBUTE30" placeholder="是否研发资产" class="text"></el-input>-->
-                        <el-select v-model="from.ATTRIBUTE30" placeholder="请选择" clearable filterable :disabled="isDisabled">
-                            <el-option v-for="item in selectLists.attribute30" :key="item.id" :label="item.name" :value="item.id"></el-option>
+                        <el-select v-model="from.ATTRIBUTE30" placeholder="请选择" clearable filterable :disabled="isDisabled" @change="handleSetATTRIBUTE30">
+                            <el-option v-for="item in selectLists.attribute30" :key="item.code" :label="item.name" :value="item.code"></el-option>
                         </el-select>
                     </el-form-item>
                 </span>
                 <span>
                     <el-form-item label="是否安全设备">
-                        <!--<el-input v-model="from.IS_SAFETY_DEVICE" placeholder="是否安全设备" class="text"></el-input>-->
                         <el-select v-model="from.IS_SAFETY_DEVICE" placeholder="请选择" clearable filterable :disabled="isDisabled">
-                            <el-option v-for="item in selectLists.is_safety_device" :key="item.id" :label="item.name" :value="item.id"></el-option>
+                            <el-option v-for="item in selectLists.is_safety_device" :key="item.code" :label="item.name" :value="item.code"></el-option>
                         </el-select>
                     </el-form-item>
                 </span>
                 <span>
                     <el-form-item label="资产类别">
-                        <!--<el-input v-model="from.ASSET_TYPE" placeholder="资产类别" class="text"></el-input>-->
                         <el-cascader placeholder="输入检索内容" :options="options" filterable clearable @change="handleCascaderEvent" :disabled="isDisabled"></el-cascader>
                     </el-form-item>
                 </span>
@@ -97,17 +94,17 @@
                 </span>
                 <span>
                     <el-form-item label="启用日期">
-                        <el-input v-model="from.DATE_PLACED_IN_SERVICE" placeholder="启用日期" class="text" :disabled="isDisabled"></el-input>
+                        <el-date-picker v-model="from.DATE_PLACED_IN_SERVICE" type="date" placeholder="选择日期"class="text" :disabled="isDisabled"></el-date-picker>
                     </el-form-item>
                 </span>
                 <span>
                     <el-form-item label="折旧/摊销起始日期">
-                        <el-input v-model="from.PRORATE_DATE" placeholder="折旧/摊销起始日期" class="text" :disabled="isDisabled"></el-input>
+                        <el-input v-model="from.PRORATE_DATE" placeholder="折旧/摊销起始日期" readonly class="text" :disabled="isDisabled"></el-input>
                     </el-form-item>
                 </span>
                 <span>
                     <el-form-item label="摊销规则">
-                        <el-input v-model="from.PRORATE_RULE" placeholder="摊销规则" class="text" :disabled="isDisabled" readonly></el-input>
+                        <el-input v-model="from.PRORATE_RULE" placeholder="摊销规则" readonly class="text" :disabled="isDisabled" readonly></el-input>
                     </el-form-item>
                 </span>
                 <span>
@@ -122,7 +119,7 @@
                 </span>
                 <span>
                     <el-form-item label="残值">
-                        <el-input v-model="from.USE_YEARS" placeholder="残值" class="text" :disabled="isDisabled"></el-input>
+                        <el-input v-model="from.RESIDAUL_VALUE" placeholder="残值" class="text" :disabled="isDisabled"></el-input>
                     </el-form-item>
                 </span>
             </div>
@@ -132,7 +129,6 @@
             <div class="other-box">
                 <span>
                     <el-form-item label="资产来源（增加方式）">
-                        <!--<el-input v-model="from.ASSET_SOURCE" placeholder="资产来源（增加方式）"></el-input>-->
                         <el-select v-model="from.ASSET_SOURCE" placeholder="请选择" clearable filterable class="select" :disabled="isDisabled">
                             <el-option v-for="item in selectLists.assetSourceList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                         </el-select>
@@ -140,7 +136,6 @@
                 </span>
                 <span>
                     <el-form-item label="资产性质">
-                        <!--<el-input v-model="from.ASSET_NATURE" placeholder="资产性质"></el-input>-->
                         <el-select v-model="from.ASSET_NATURE" placeholder="请选择" clearable filterable class="select" :disabled="isDisabled">
                             <el-option v-for="item in selectLists.assetNatureList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                         </el-select>
@@ -148,9 +143,8 @@
                 </span>
                 <span>
                     <el-form-item label="资产状态">
-                        <!--<el-input v-model="from.ASSET_STATUS" placeholder="资产状态"></el-input>-->
                         <el-select v-model="from.ASSET_STATUS" placeholder="请选择" clearable filterable class="select" :disabled="isDisabled">
-                            <el-option v-for="item in selectLists.asset_status" :key="item.id" :label="item.name" :value="item.id"></el-option>
+                            <el-option v-for="item in selectLists.asset_status" :key="item.code" :label="item.name" :value="item.code"></el-option>
                         </el-select>
                     </el-form-item>
                 </span>
@@ -176,9 +170,9 @@
                 </span>
                 <!--资产详情设置-->
                 <el-collapse v-model="activeName2" accordion style="width: 90%;margin-left: 40px;">
-                    <el-collapse-item title="资产类别详情设置" name="1">
-                        <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                        <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+                    <el-collapse-item title="资产类别配置参数" name="1">
+                        <!-- 资产类别对应的参数子页面 -->
+                        <asset-type-cascader ref="assetTypeFrom"></asset-type-cascader>
                     </el-collapse-item>
                 </el-collapse>
             </div>
@@ -209,34 +203,38 @@
             <el-tabs v-model="activeName" type="border-card">
                 <el-tab-pane label="分配" name="first_ele">
                     <!-- 资产分配数据表 -->
-                    <el-table :data="from.distribution_table" border stripe tooltip-effect="dark">
+                    <el-table :data="from.distribution_table" border stripe tooltip-effect="dark" @cell-click="((row, column, cell, event)=>{handleColumnClick(row, column, cell, event,this.from.distribution_table)})">
                         <el-table-column type="index" width="50" label="行号"></el-table-column>
-                        <el-table-column prop="UNITS_ASSIGNED" label="数量百分比">
+                        <el-table-column prop="UNITS_ASSIGNED.value" label="数量百分比">
+                           <template slot-scope="scope">
+                                <el-input v-if="scope.row.UNITS_ASSIGNED.isEdit"  v-model="scope.row.UNITS_ASSIGNED.value" @change="handlerIsNumber" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.UNITS_ASSIGNED.value}}</span>
+                           </template>
+                        </el-table-column>
+                        <el-table-column prop="GCC_SEGS.value" label="折旧分配账户">
                             <template slot-scope="scope">
-                                <el-input v-model="scope.row.UNITS_ASSIGNED" @change="handlerIsNumber"></el-input>
+                                <el-input v-if="scope.row.GCC_SEGS.isEdit" v-model="scope.row.GCC_SEGS.value" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.GCC_SEGS.value}}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="GCC_SEGS" label="折旧分配账户">
+                        <el-table-column prop="USE_DEPT.value" label="使用部门">
                             <template slot-scope="scope">
-                                <el-input v-model="scope.row.GCC_SEGS"></el-input>
+                                <el-input v-if="scope.row.USE_DEPT.isEdit" v-model="scope.row.USE_DEPT.value" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.USE_DEPT.value}}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="RESPONSIBLE_DEPARTMENT" label="使用部门">
+                        <el-table-column prop="USE_PERSON.value" label="使用人">
                             <template slot-scope="scope">
-                                <el-input v-model="scope.row.USE_DEPT"></el-input>
-                            </template>
-                        </el-table-column>
-                        <el-table-column prop="USE_PERSON" label="使用人">
-                            <template slot-scope="scope">
-                                <el-input v-model="scope.row.USE_PERSON"></el-input>
+                                <el-input  v-if="scope.row.USE_PERSON.isEdit" v-model="scope.row.USE_PERSON.value" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.USE_PERSON.value}}</span>
                             </template>
                         </el-table-column>
                         <template v-if="use_type > 1">
-                            <el-table-column prop="USE_PERSON" label="创建人"></el-table-column>
-                            <el-table-column prop="USE_PERSON" label="创建日期"></el-table-column>
+                            <el-table-column prop="CREATE_PERSON" label="创建人"></el-table-column>
+                            <el-table-column prop="CREATE_DATE" label="创建日期"></el-table-column>
                             <template v-if="use_type > 2">
-                                <el-table-column prop="USE_PERSON" label="最后修改人"></el-table-column>
-                                <el-table-column prop="USE_PERSON" label="最后修改日期"></el-table-column>
+                                <el-table-column prop="LAST_MODIFIED_PERSON" label="最后修改人"></el-table-column>
+                                <el-table-column prop="LAST_MODIFIED_DATE" label="最后修改日期"></el-table-column>
                             </template>
                         </template>
                         <el-table-column label="操作" width="145px">
@@ -247,45 +245,50 @@
                         </el-table-column>
                     </el-table>
                 </el-tab-pane>
-                <template v-if="use_type > 1">
-                    <el-tab-pane label="发票" name="second_ele">
-                        <el-table :data="from.distribution_table" border stripe tooltip-effect="dark">
-                            <el-table-column type="index" width="50" label="行号"></el-table-column>
-                            <el-table-column prop="UNITS_ASSIGNED" label="发票编号">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.UNITS_ASSIGNED" @change="handlerIsNumber"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="GCC_SEGS" label="发票日期">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.GCC_SEGS"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="RESPONSIBLE_DEPARTMENT" label="发票金额">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.USE_DEPT"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="USE_PERSON" label="说明">
-                                <template slot-scope="scope">
-                                    <el-input v-model="scope.row.USE_PERSON"></el-input>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="USE_PERSON" label="创建人"></el-table-column>
-                            <el-table-column prop="USE_PERSON" label="创建日期"></el-table-column>
-                            <template v-if="use_type > 2">
-                                <el-table-column prop="USE_PERSON" label="最后修改人"></el-table-column>
-                                <el-table-column prop="USE_PERSON" label="最后修改日期"></el-table-column>
+                <!--发票表格-->
+                <el-tab-pane label="发票" name="second_ele">
+                    <el-table :data="invoice_table" border stripe tooltip-effect="dark" @cell-click="((row, column, cell, event)=>{handleColumnClick(row, column, cell, event,this.invoice_table)})">
+                        <el-table-column type="index" width="50" label="行号"></el-table-column>
+                        <el-table-column prop="INVOICE_CODE.value" label="发票编号">
+                            <template slot-scope="scope">
+                                <el-input v-if="scope.row.INVOICE_CODE.isEdit"  v-model="scope.row.INVOICE_CODE.value" @change="handlerIsNumber" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.INVOICE_CODE.value}}</span>
                             </template>
-                            <el-table-column label="操作" width="145px">
-                                <template slot-scope="scope">
-                                    <el-button @click="handlerdistrubutionAddClick(scope)" type="primary">添加</el-button>
-                                    <el-button @click="handlerdistrubutionDelClick(scope)" type="danger">删除</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                    </el-tab-pane>
-                </template>
+                        </el-table-column>
+                        <el-table-column prop="INVOICE_DATE.value" label="发票日期">
+                            <template slot-scope="scope">
+                                <el-input v-if="scope.row.INVOICE_DATE.isEdit" v-model="scope.row.INVOICE_DATE.value" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.INVOICE_DATE.value}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="INVOICE_AMOUNT.value" label="发票金额">
+                            <template slot-scope="scope">
+                                <el-input v-if="scope.row.INVOICE_AMOUNT.isEdit" v-model="scope.row.INVOICE_AMOUNT.value" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.INVOICE_AMOUNT.value}}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="INVOICE_DESP.value" label="说明">
+                            <template slot-scope="scope">
+                                <el-input  v-if="scope.row.INVOICE_DESP.isEdit" v-model="scope.row.INVOICE_DESP.value" :disabled="isDisabled"></el-input>
+                                <span v-else>{{scope.row.INVOICE_DESP.value}}</span>
+                            </template>
+                        </el-table-column>
+                        <template v-if="use_type > 1">
+                            <el-table-column prop="CREATE_PERSON" label="创建人"></el-table-column>
+                            <el-table-column prop="CREATE_DATE" label="创建日期"></el-table-column>
+                            <template v-if="use_type > 2">
+                                <el-table-column prop="LAST_MODIFIED_PERSON" label="最后修改人"></el-table-column>
+                                <el-table-column prop="LAST_MODIFIED_DATE" label="最后修改日期"></el-table-column>
+                            </template>
+                        </template>
+                        <el-table-column label="操作" width="145px">
+                            <template slot-scope="scope">
+                                <el-button @click="handlerdistrubutionAddClick(scope)" type="primary">添加</el-button>
+                                <el-button @click="handlerdistrubutionDelClick(scope)" type="danger">删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-tab-pane>
                 <template v-if="use_type > 2">
                     <el-tab-pane label="保险" name="thread_ele">
                         <y-table :data="insurance_table" :pagination="showPagination"></y-table>
@@ -306,19 +309,26 @@
                         <el-table-column type="index" width="50" label="行号"></el-table-column>
                         <el-table-column prop="file_type" label="类型" width="260px">
                             <template slot-scope="scope">
-                                <el-select v-model="scope.row.file_type" placeholder="请选择" clearable @change="((val)=>{handleFileSelectChange(val,scope)})">
+                                <el-select v-model="scope.row.file_type" placeholder="请选择" clearable @change="((val)=>{handleFileSelectChange(val,scope)})" :disabled="isDisabled">
                                     <el-option v-for="item in fileupload_type" :key="item.code" :label="item.name" :value="item.code"></el-option>
                                 </el-select>
                             </template>
                         </el-table-column>
                         <el-table-column prop="file_id" label="资源浏览">
                             <template slot-scope="scope">
-                                <el-upload action="https://jsonplaceholder.typicode.com/posts/" :on-success="handleUpload" :on-change="handleChange"
-                                           :file-list="scope.row.fileList" :list-type="scope.row.listType">
-                                    <el-button slot="trigger" size="small" type="primary">点击上传</el-button>
+                                <el-upload :action="file_path" :on-success="handleUpload" :on-change="handleChange"
+                                           :file-list="scope.row.fileList" :list-type="scope.row.listType" :disabled="isDisabled">
                                 </el-upload>
                             </template>
                         </el-table-column>
+                        <template v-if="use_type > 1">
+                            <el-table-column prop="USE_PERSON" label="创建人"></el-table-column>
+                            <el-table-column prop="USE_PERSON" label="创建日期"></el-table-column>
+                            <template v-if="use_type > 2">
+                                <el-table-column prop="USE_PERSON" label="最后修改人"></el-table-column>
+                                <el-table-column prop="USE_PERSON" label="最后修改日期"></el-table-column>
+                            </template>
+                        </template>
                         <el-table-column label="操作" width="145px">
                             <template slot-scope="scope">
                                 <el-button @click="handlerFileTableAddClick(scope)" type="primary">添加</el-button>
@@ -340,7 +350,9 @@
     </el-dialog>
 </template>
 <script>
+    import assetTypeCascader from "./assetTypeCascader";
     export default {
+        components: {assetTypeCascader},
         data(){
             let fromList = {
                 BOOK_TYPE_CODE:"",//资产账簿
@@ -363,6 +375,7 @@
                 PRORATE_RULE: "",   //摊销规则
                 LIFE_IN_MONTHS: "", //使用月数
                 USE_YEARS: "",  //已使用年限
+                RESIDAUL_VALUE: "", //残值
                 GEOGRAPHIC_LOCATION: "",//当前地理位置
                 ASSET_SOURCE: "",   //资产来源
                 ASSET_NATURE: "",   //资产性质
@@ -375,19 +388,22 @@
                 CREATE_DATE: "",    //创建时间
                 LAST_MODIFIED_PERSON: "",   //最后修改人
                 LAST_MODIFIED_DATE: "", //最后修改时间
+                //资产类型联动输入内容
+                fieIds1: [], //资产配置1-根据资产类型进行变化
+                fieIds2: [],    //资产配置2-根据资产账簿和资产类型进行变化
                 //分配表格区域内容
                 distribution_table: [
                     {
-                        UNITS_ASSIGNED: 0,  //数量
-                        GCC_SEGS: "",   //折旧分配账户
+                        UNITS_ASSIGNED: {value: 0, isEdit: false},  //数量
+                        GCC_SEGS: {value: "", isEdit: false},   //折旧分配账户
                         /*RESPONSIBLE_DEPARTMENT: "", //责任部门
                         ASSIGNED_TO: "",    //责任人*/
-                        USE_PERSON: "",  //使用人
-                        USE_DEPT: "",  //使用部门
+                        USE_PERSON: {value: "", isEdit: false},  //使用人
+                        USE_DEPT: {value: "", isEdit: false},  //使用部门
                         CREATE_PERSON: "",  //创建人
                         CREATE_DATE: "",    //创建日期
                         LAST_MODIFIED_PERSON: "",   //最后一次修改人
-                        LAST_MODIFIED_DATE: ""      //最后一次修改日期
+                        LAST_MODIFIED_DATE: "",      //最后一次修改日期
                     }
                 ],
                 fileupload: []  //文件上传相关参数
@@ -434,78 +450,58 @@
             ];
             //资产参数列表
             let optionsList = [      //资产状态 级联操作参数
-                {value: 'zhinan',label: '指南',children: [
-                    {value: 'shejiyuanze',label: '设计原则',children: [
-                        {value: 'yizhi',label: '一致'},
-                        {value: 'fankui',label: '反馈'},
-                        {value: 'xiaolv',label: '效率'},
-                        {value: 'kekong',label: '可控'}
-                    ]},
-                    {value: 'daohang',label: '导航',children: [
-                        {value: 'cexiangdaohang',label: '侧向导航'},
-                        {value: 'dingbudaohang',label: '顶部导航'}
-                    ]}
+                {value: '房屋建筑物',label: '房屋建筑物',children: [
+                    {value: '生产用房',label: '生产用房'},
+                    {value: '仓储房',label: '仓储房'},
+                    {value: '办公用房',label: '办公用房'},
+                    {value: '生活及服务设施用房',label: '生活及服务设施用房'},
+                    {value: '油库及储油池（罐）',label: '油库及储油池（罐）'},
+                    {value: '简易或易受腐蚀建筑物',label: '简易或易受腐蚀建筑物'},
+                    {value: '临时性建筑物',label: '临时性建筑物'}
                 ]},
-                {value: 'zujian',label: '组件',children: [
-                    {value: 'basic',label: 'Basic',children: [
-                        {value: 'layout',label: 'Layout 布局'},
-                        {value: 'color',label: 'Color 色彩'},
-                        {value: 'typography',label: 'Typography 字体'},
-                        {value: 'icon',label: 'Icon 图标'},
-                        {value: 'button',label: 'Button 按钮'}
-                    ]},
-                    {value: 'form',label: 'Form',children: [
-                        {value: 'radio',label: 'Radio 单选框'},
-                        {value: 'checkbox',label: 'Checkbox 多选框'},
-                        {value: 'input',label: 'Input 输入框'},
-                        {value: 'input-number',label: 'InputNumber 计数器'},
-                        {value: 'select',label: 'Select 选择器'},
-                        {value: 'cascader',label: 'Cascader 级联选择器'},
-                        {value: 'switch',label: 'Switch 开关'},
-                        {value: 'slider',label: 'Slider 滑块'},
-                        {value: 'time-picker',label: 'TimePicker 时间选择器'},
-                        {value: 'date-picker',label: 'DatePicker 日期选择器'},
-                        {value: 'datetime-picker',label: 'DateTimePicker 日期时间选择器'},
-                        {value: 'upload',label: 'Upload 上传'},
-                        {value: 'rate',label: 'Rate 评分'},
-                        {value: 'form',label: 'Form 表单'}
-                    ]},
-                    {value: 'data',label: 'Data',children: [
-                        {value: 'table',label: 'Table 表格'},
-                        {value: 'tag',label: 'Tag 标签'},
-                        {value: 'progress',label: 'Progress 进度条'},
-                        {value: 'tree',label: 'Tree 树形控件'},
-                        {value: 'pagination',label: 'Pagination 分页'},
-                        {value: 'badge',label: 'Badge 标记'}
-                    ]},
-                    {value: 'notice',label: 'Notice',children: [
-                        {value: 'alert',label: 'Alert 警告'},
-                        {value: 'loading',label: 'Loading 加载'},
-                        {value: 'message',label: 'Message 消息提示'},
-                        {value: 'message-box',label: 'MessageBox 弹框'},
-                        {value: 'notification',label: 'Notification 通知'}
-                    ]},
-                    {value: 'navigation',label: 'Navigation',children: [
-                        {value: 'menu',label: 'NavMenu 导航菜单'},
-                        {value: 'tabs',label: 'Tabs 标签页'},
-                        {value: 'breadcrumb',label: 'Breadcrumb 面包屑'},
-                        {value: 'dropdown',label: 'Dropdown 下拉菜单'},
-                        {value: 'steps',label: 'Steps 步骤条'}
-                    ]},
-                    {value: 'others',label: 'Others',children: [
-                        {value: 'dialog',label: 'Dialog 对话框'},
-                        {value: 'tooltip',label: 'Tooltip 文字提示'},
-                        {value: 'popover',label: 'Popover 弹出框'},
-                        {value: 'card',label: 'Card 卡片'},
-                        {value: 'carousel',label: 'Carousel 走马灯'},
-                        {value: 'collapse',label: 'Collapse 折叠面板'}
-                    ]}
+                {value: '建筑物',label: '建筑物',children: [
+                    {value: '码头',label: '码头'},
+                    {value: '堆场',label: '堆场'},
+                    {value: '道路',label: '道路'}
                 ]},
-                {value: 'ziyuan',label: '资源',children: [
-                    {value: 'axure',label: 'Axure Components'},
-                    {value: 'sketch',label: 'Sketch Templates'},
-                    {value: 'jiaohu',label: '组件交互文档'}
-                ]}
+                {value: '机械设备',label: '机械设备',children: [
+                    {value: "动力及起重设备", label: "动力及起重设备"},
+                    {value: "拖头托板", label: "拖头托板"},
+                    {value: "普通机械设备", label: "普通机械设备"},
+                    {value: "专用设备", label: "专用设备"}
+                ]},
+                {value: '集装箱、货架及托盘',label: '集装箱、货架及托盘',children: [
+                    {value: "集装箱", label: "集装箱"},
+                    {value: "集装箱", label: "集装箱"},
+                    {value: "货架", label: "货架"}
+                ]},
+                {value: '运输工具',label: '运输工具',children: [
+                    {value: "船舶", label: "船舶"},
+                    {value: "车辆", label: "车辆"}
+                ]},
+                {value: '办公设备及家具',label: '办公设备及家具',children: [
+                    {value: "办公家具", label: "办公家具"},
+                    {value: "办公电器", label: "办公电器"},
+                    {value: "信息化设备", label: "信息化设备"}
+                ]},
+                {value: '土地使用权',label: '土地使用权',children: [
+                    {value: "生产操作用地", label: "生产操作用地"},
+                    {value: "道路交通用地", label: "道路交通用地"},
+                    {value: "办公场所用地", label: "办公场所用地"},
+                    {value: "生活及服务设施用地", label: "生活及服务设施用地"}
+                ]},
+                {value: '无形资产',label: '无形资产',children: [
+                    {value: "软件", label: "软件"},
+                    {value: "专利权", label: "专利权"},
+                    {value: "非专利技术", label: "非专利技术"},
+                    {value: "商标权", label: "商标权"},
+                    {value: "著作权", label: "著作权"},
+                    {value: "特许权", label: "特许权"}
+                ]},
+                {value: '投资性房地产',label: '投资性房地产',children: [
+                    {value: "投资性房产", label: "投资性房产"},
+                    {value: "投资性地产", label: "投资性地产"},
+                ]},
             ];
             //保险表格参数
             let insuranceTable = {
@@ -541,7 +537,7 @@
                     {key: "col5", value: "更新日期"},
                 ]
             };
-            //租赁表格数据
+            //维修/保养表格数据
             let maintenanceTable = {
                 url: this.$my.path2+"/zcgl/xc",       //数据请求地址
                 pageSize: 10,   //每页显示记录条数
@@ -557,7 +553,8 @@
                     {key: "col5", value: "最后修改人"},
                     {key: "col5", value: "更新日期"},
                 ]
-            };//租赁表格数据
+            };
+            //优化表格数据
             let optimizeTable = {
                 url: this.$my.path2+"/zcgl/xc",       //数据请求地址
                 pageSize: 10,   //每页显示记录条数
@@ -572,12 +569,9 @@
                     {key: "col5", value: "更新日期"},
                 ]
             };
-            //发票表格参数
-            let invoiceTable = [
-                {INVOICE_CODE: "123", INVOICE_DATE: "2019-06-04", INVOICE_AMOUNT: "123"},
-            ];
             return {
                 activeName: "first_ele",
+                file_path: "",
                 activeName2: 1, //折叠面板操作绑定
                 showPagination: true,   //是否具有分页
                 isDisabled: false,  //是否禁之操作
@@ -590,17 +584,31 @@
                 lease_table: leaseTable,        //租赁表格参数
                 maintenance_table: maintenanceTable,  //维修表格参数
                 optimize_table: optimizeTable,     //优化表格参数
-                invoice_table: invoiceTable,        //发票表格参数
+                invoice_table: [
+                    {
+                        INVOICE_CODE: { value: "1", isEdit: false},
+                        INVOICE_DATE: {value: "2", isEdit: false},
+                        INVOICE_AMOUNT: {value: "3", isEdit: false},
+                        INVOICE_DESP: {value: "4", isEdit: false},
+                        CREATE_PERSON: "",  //创建人
+                        CREATE_DATE: "",    //创建日期
+                        LAST_MODIFIED_PERSON: "",   //最后一次修改人
+                        LAST_MODIFIED_DATE: "",      //最后一次修改日期
+                    }
+                ],  //发票表格参数
                 fileupload_table: fileuploadTable,//文件上传区域设定
                 fileupload_type: fileuploadType,      //文件上传上传类型的指定
-                options: optionsList
+                options: optionsList,            //资产类型级联列表数据
             }
         },
         created(){
             //下拉列表数据处理
             this.handlerLoadSelectLists();
             //创建人，创建日期赋值
+            this.access_token = window.localStorage.getItem("user_token");
 
+            //文件上传
+            this.file_path = "http://10.231.128.189:1111/upload/test?access_token=30ff6ecf-437b-4b89-9b12-a1eeac2e2ba4";
         },
         methods:{
             onSubmit() {
@@ -621,8 +629,8 @@
             //页面所有下拉列表数据的加载
             handlerLoadSelectLists(){
                 let self = this;
-                let data = { keys: ["assetBookList","organizationList"]};
-                /*this.$my.post(this,this.$my.path_app+"/batch/searchList",data,function(data){
+                let data = { keys: ["assetBookList","organizationList","unitList","assetSourceList","assetNatureList","attachmentTypeList"]};
+                this.$my.post(this,this.$my.path_app+"/batch/searchList",data,function(data){
                     data = JSON.parse(data);
                     for(let i in data){
                         if(self.selectLists.hasOwnProperty(data[i].key)){
@@ -634,12 +642,12 @@
                     }
                 },function(err){
                     console.log(err);
-                });*/
+                });
 
             },
-            //表单确认按钮的触发
+            //表单保存按钮的触发
             handlerClickSaveBtn(){
-                console.log(this.from);
+                console.log(this.$refs["assetTypeFrom"].request_data);
                 /*this.$my.post(this,this.$my.path_app+"/asset/add",this.from,function(data){
                     console.log(data);
                 });*/
@@ -647,11 +655,14 @@
             //分配表格添加数据
             handlerdistrubutionAddClick(e){
                 this.from.distribution_table.push({
-                    UNITS_ASSIGNED: 0,  //数量
-                    GCC_SEGS: "",   //折旧分配账户
-                    RESPONSIBLE_DEPARTMENT: "", //责任部门
-                    ASSIGNED_TO: "",    //责任人
-                    USE_PERSON: ""  //使用人
+                    UNITS_ASSIGNED: {value: 0, isEdit: false},  //数量
+                    GCC_SEGS: {value: "", isEdit: false},   //折旧分配账户
+                    USE_PERSON: {value: "", isEdit: false},  //使用人
+                    USE_DEPT: {value: "", isEdit: false},  //使用部门
+                    CREATE_PERSON: "",  //创建人
+                    CREATE_DATE: "",    //创建日期
+                    LAST_MODIFIED_PERSON: "",   //最后一次修改人
+                    LAST_MODIFIED_DATE: "",      //最后一次修改日期
                 });
             },
             //分配数据删除操作
@@ -665,6 +676,23 @@
                         new_data.push(_data[i]);
                     }
                     this.from.distribution_table = new_data;
+                }
+            },
+            //分配单元格点击事件
+            handleColumnClick(row, column, cell, event,tableList){
+                let _lists = tableList,_data;
+                //关闭全部编辑状态
+                for(let i in _lists){
+                    _data = _lists[i];
+                    for(let j in _data){
+                        if(typeof _data[j] == "object")  _data[j].isEdit = false;
+                    }
+                }
+                //仅仅打开当前点击列的编辑状态
+                if(!!column.property){
+                    let key = column.property.split(".")[0];
+                    if(typeof row[key] == "object")
+                        row[key].isEdit = true;
                 }
             },
             //资源表格添加数据
@@ -688,11 +716,14 @@
             handleChange(file, fileList) {
                 this.fileList = fileList.slice(-3);
             },
+            //对上传后的文件参数进行处理
             handleUpload(response, file, fileList){
-                console.log(response);
-                console.log(file);
-                console.log(fileList);
+                if(response.status == 0){
+                    let data = response.message;
+
+                }
             },
+            //对文件类型选择后的上传样式进行改变
             handleFileSelectChange(e,scope){
                 let data = this.fileupload_table,_index = scope.$index;
                 if(e == "004")  this.fileupload_table[scope.$index].listType = "picture-card";
@@ -700,7 +731,12 @@
             },
             //级联选择器的change事件的绑定
             handleCascaderEvent(val){
-                this.$message(val.toString());
+                this.$refs["assetTypeFrom"].url=this.$my.path_app+"/data/fieldConfigList?assetTypeCode="+val[val.length - 1];
+                this.$refs["assetTypeFrom"].handeGetData();
+            },
+            //设置是否研发资产参数
+            handleSetATTRIBUTE30(val){
+                console.log(val);
             }
         }
     }
@@ -713,6 +749,5 @@
     .text{width: 215px;}
     .maxWidth{width: 80%;}
     .other-box>span{width: 45%;display: inline-block;}
-    .upload-demo{width: 100px; height: 35px;}
     .select{width: 320px;}
 </style>

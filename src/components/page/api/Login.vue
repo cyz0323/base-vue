@@ -54,8 +54,8 @@
                     +"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        //"http://10.231.128.189:5000/oauth/token?grant_type=password&username=HD_OUYANGH&password=1&client_id=app&client_secret=app"
                        this.$axios.post(path).then( res =>{
+                           console.log(res);
                             let _data = res.data;
                             if(_data.status == 0){
                                 localStorage.setItem('user_name',self.ruleForm.username);
@@ -65,7 +65,8 @@
                                 this.$message(_data.message);
                             }
                         }).catch(err=>{
-                            this.$message(err.response.data.message);
+                            if(!!err.response)  this.$message(err.response.data.message);
+                            else this.$message("服务出现错误："+err.toString());
                         });
                     } else {
                         this.$message("验证失败，输入格式错误！。");

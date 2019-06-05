@@ -100,10 +100,11 @@
                 this.isSearch = true;
             },
             //详情查看
-            handleShwoView(index, row) {
+            handleShwoView() {
                 this.$refs["dialog"].display = true;
                 this.$refs["dialog"].use_type = 3;
                 this.$refs["dialog"].isDisabled = true;
+                this.$refs["dialog"].activeName = "first_ele";
             },
             //添加按钮事件定义，datas：返回复选的所有行的数据
             handleAddData(){
@@ -111,6 +112,7 @@
                 this.$refs["dialog"].display = true;
                 this.$refs["dialog"].use_type = 1;
                 this.$refs["dialog"].isDisabled = false;
+                this.$refs["dialog"].activeName = "first_ele";
             },
             //数据删除操作
             handleDelData(data){
@@ -123,10 +125,11 @@
                 });
             },
             //表格数据修改
-            handleUpdate(data){
+            handleUpdate(){
                 this.$refs["dialog"].display = true;
                 this.$refs["dialog"].use_type = 2;
                 this.$refs["dialog"].isDisabled = false;
+                this.$refs["dialog"].activeName = "first_ele";
             }
         }
     }

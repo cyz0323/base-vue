@@ -76,7 +76,7 @@
 </template>
 
 <script>
-    import zctjedit from '../zctjedit'
+    import zctjedit from '../assetTypeCascader'
     import zcdbedit from './zcdbedit';
     export default {
         name: 'zcdbcx',

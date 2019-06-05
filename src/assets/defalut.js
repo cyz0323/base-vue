@@ -5,10 +5,20 @@ const defaultParam = {
     /* 测试地址 */
     // path_login: "http://10.231.128.189:5000",
     // path_app: "http://10.231.128.189:8082",
+    /* 测试地址二 */
+    path_login: "http://10.231.132.130:5000",
+    path_app: "http://10.231.132.130:8082",
     /*本地地址*/
-    path_login: "http://localhost:8888",
-    path_app: "http://localhost:8888",
+    // path_login: "http://localhost:8888",
+    // path_app: "http://localhost:8888",
     path2: "http://localhost:8888",
+
+
+
+    //文件上传： http://10.231.128.189:1111/upload/test?access_token=30ff6ecf-437b-4b89-9b12-a1eeac2e2ba4
+    //文件下载： http://10.231.128.189:1111/download/fileId      //fileId为当前资源的id
+    //获取文件信息： http://10.231.128.189:1111/getFileInfo/fileId         //fileId为上传资源id
+
 };
 
 /*
@@ -64,6 +74,7 @@ defaultParam.get = function(self,url,successCallback,errorCallback){
                 else   _this.errorMsg(self, _data.message);
             }
         }).catch(err=>{
+            if(err.request.status == 401) this.logout(self);
             if(!!errorCallback)  errorCallback(err);
             else    _this.errorMsg(self, "参数请求异常！"+err.toString());
         });
@@ -102,6 +113,7 @@ defaultParam.post = function(self,url, data,successCallback,errorCallback){
                 else   _this.errorMsg(self, _data.message);
             }
         }).catch(err=>{
+            if(err.request.status == 401) this.logout(self);
             if(!!errorCallback)  errorCallback(err);
             else    _this.errorMsg(self, "参数请求异常！"+err.toString());
         });
