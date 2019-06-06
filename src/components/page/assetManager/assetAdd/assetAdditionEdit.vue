@@ -65,7 +65,7 @@
                 </span>
                 <span>
                     <el-form-item label="是否研发资产">
-                        <el-select v-model="from.ATTRIBUTE30" placeholder="请选择" clearable filterable :disabled="isDisabled" @change="handleSetATTRIBUTE30">
+                        <el-select v-model="from.ATTRIBUTE30" placeholder="请选择" clearable filterable :disabled="isDisabled">
                             <el-option v-for="item in selectLists.attribute30" :key="item.code" :label="item.name" :value="item.code"></el-option>
                         </el-select>
                     </el-form-item>
@@ -82,7 +82,7 @@
                         <el-cascader placeholder="输入检索内容" :options="options" filterable clearable @change="handleCascaderEvent" :disabled="isDisabled"></el-cascader>
                     </el-form-item>
                 </span>
-                <span>
+                <!--<span>
                     <el-form-item label="关键字">
                         <el-input v-model="from.ASSET_KEY_CCID" placeholder="关键字" class="text" :disabled="isDisabled"></el-input>
                     </el-form-item>
@@ -91,7 +91,7 @@
                     <el-form-item label="地点">
                         <el-input v-model="from.LOCATION" placeholder="地点" class="text" :disabled="isDisabled"></el-input>
                     </el-form-item>
-                </span>
+                </span>-->
                 <span>
                     <el-form-item label="启用日期">
                         <el-date-picker v-model="from.DATE_PLACED_IN_SERVICE" type="date" placeholder="选择日期"class="text" :disabled="isDisabled"></el-date-picker>
@@ -171,8 +171,10 @@
                 <!--资产详情设置-->
                 <el-collapse v-model="activeName2" accordion style="width: 90%;margin-left: 40px;">
                     <el-collapse-item title="资产类别配置参数" name="1">
-                        <!-- 资产类别对应的参数子页面 -->
                         <asset-type-cascader ref="assetTypeFrom"></asset-type-cascader>
+                    </el-collapse-item>
+                    <el-collapse-item title="资产类别-资产账簿配置参数" name="2">
+                        <asset-type-cascader ref="assetTypeFrom2"></asset-type-cascader>
                     </el-collapse-item>
                 </el-collapse>
             </div>
@@ -203,7 +205,7 @@
             <el-tabs v-model="activeName" type="border-card">
                 <el-tab-pane label="分配" name="first_ele">
                     <!-- 资产分配数据表 -->
-                    <el-table :data="from.distribution_table" border stripe tooltip-effect="dark" @cell-click="((row, column, cell, event)=>{handleColumnClick(row, column, cell, event,this.from.distribution_table)})">
+                    <el-table :data="from.distributionList" border stripe tooltip-effect="dark" @cell-click="((row, column, cell, event)=>{handleColumnClick(row, column, cell, event,this.from.distributionList)})">
                         <el-table-column type="index" width="50" label="行号"></el-table-column>
                         <el-table-column prop="UNITS_ASSIGNED.value" label="数量百分比">
                            <template slot-scope="scope">
@@ -213,7 +215,7 @@
                         </el-table-column>
                         <el-table-column prop="GCC_SEGS.value" label="折旧分配账户">
                             <template slot-scope="scope">
-                                <el-input v-if="scope.row.GCC_SEGS.isEdit" v-model="scope.row.GCC_SEGS.value" :disabled="isDisabled"></el-input>
+                                <el-input v-if="scope.row.GCC_SEGS.isEdit" v-model="scope.row.GCC_SEGS.value" readonly :disabled="isDisabled" @focus="handleGccSegs"></el-input>
                                 <span v-else>{{scope.row.GCC_SEGS.value}}</span>
                             </template>
                         </el-table-column>
@@ -316,9 +318,8 @@
                         </el-table-column>
                         <el-table-column prop="file_id" label="资源浏览">
                             <template slot-scope="scope">
-                                <el-upload :action="file_path" :on-success="handleUpload" :on-change="handleChange"
-                                           :file-list="scope.row.fileList" :list-type="scope.row.listType" :disabled="isDisabled">
-                                </el-upload>
+                                <el-upload :action="file_path" :on-success="handleUpload" :on-change="handleChange" :file-list="scope.row.fileList"
+                                           :list-type="scope.row.listType" :disabled="isDisabled"></el-upload>
                             </template>
                         </el-table-column>
                         <template v-if="use_type > 1">
@@ -337,6 +338,8 @@
                         </el-table-column>
                     </el-table>
                 </el-tab-pane>
+                <!--内部检讨dialog-->
+                <asset-gcc-segs ref="childDialog"></asset-gcc-segs>
             </el-tabs>
 
         </el-form>
@@ -350,9 +353,10 @@
     </el-dialog>
 </template>
 <script>
-    import assetTypeCascader from "./assetTypeCascader";
+    import assetTypeCascader from './assetTypeCascader';
+    import assetGccSegs from './assetGccSegsDialog';
     export default {
-        components: {assetTypeCascader},
+        components: {assetTypeCascader,assetGccSegs},
         data(){
             let fromList = {
                 BOOK_TYPE_CODE:"",//资产账簿
@@ -368,8 +372,8 @@
                 ATTRIBUTE30: "",    //是否研发资产
                 IS_SAFETY_DEVICE: "",   //是否安全设备
                 ASSET_TYPE: "", //资产类别
-                ASSET_KEY_CCID: "", //关键字
-                LOCATION: "",   //地点
+                // ASSET_KEY_CCID: "", //关键字
+                // LOCATION: "",   //地点
                 DATE_PLACED_IN_SERVICE: "", //启用日期
                 PRORATE_DATE:"",    //折旧/摊销启始日期
                 PRORATE_RULE: "",   //摊销规则
@@ -392,9 +396,9 @@
                 fieIds1: [], //资产配置1-根据资产类型进行变化
                 fieIds2: [],    //资产配置2-根据资产账簿和资产类型进行变化
                 //分配表格区域内容
-                distribution_table: [
+                distributionList: [
                     {
-                        UNITS_ASSIGNED: {value: 0, isEdit: false},  //数量
+                        UNITS_ASSIGNED: {value: "", isEdit: false},  //数量
                         GCC_SEGS: {value: "", isEdit: false},   //折旧分配账户
                         /*RESPONSIBLE_DEPARTMENT: "", //责任部门
                         ASSIGNED_TO: "",    //责任人*/
@@ -406,7 +410,10 @@
                         LAST_MODIFIED_DATE: "",      //最后一次修改日期
                     }
                 ],
-                fileupload: []  //文件上传相关参数
+                //发票相关参数
+                invoiceList: [],
+                //文件上传相关参数
+                fileupload: []
             };
             //表单验证区域
             let relusObj = {
@@ -572,6 +579,7 @@
             return {
                 activeName: "first_ele",
                 file_path: "",
+                column_element: null,
                 activeName2: 1, //折叠面板操作绑定
                 showPagination: true,   //是否具有分页
                 isDisabled: false,  //是否禁之操作
@@ -606,7 +614,6 @@
             this.handlerLoadSelectLists();
             //创建人，创建日期赋值
             this.access_token = window.localStorage.getItem("user_token");
-
             //文件上传
             this.file_path = "http://10.231.128.189:1111/upload/test?access_token=30ff6ecf-437b-4b89-9b12-a1eeac2e2ba4";
         },
@@ -622,7 +629,7 @@
             },
             //是否为数字的验证
             handlerIsNumber(){
-                let _data = this.from.distribution_table;
+                let _data = this.from.distributionList;
                 for(let i in _data)
                     if(typeof _data[i].UNITS_ASSIGNED == "string") _data[i].UNITS_ASSIGNED = 0;
             },
@@ -630,7 +637,7 @@
             handlerLoadSelectLists(){
                 let self = this;
                 let data = { keys: ["assetBookList","organizationList","unitList","assetSourceList","assetNatureList","attachmentTypeList"]};
-                this.$my.post(this,this.$my.path_app+"/batch/searchList",data,function(data){
+                this.$my.post(this,this.$my.path+"/ams/batch/searchList",data,function(data){
                     data = JSON.parse(data);
                     for(let i in data){
                         if(self.selectLists.hasOwnProperty(data[i].key)){
@@ -647,14 +654,29 @@
             },
             //表单保存按钮的触发
             handlerClickSaveBtn(){
-                console.log(this.$refs["assetTypeFrom"].request_data);
-                /*this.$my.post(this,this.$my.path_app+"/asset/add",this.from,function(data){
-                    console.log(data);
+                //针对时间的处理
+                this.from.DATE_PLACED_IN_SERVICE = new Date(this.from.DATE_PLACED_IN_SERVICE).getTime();
+                //对参数列表1的处理
+                this.from.fieIds1 = this.$refs["assetTypeFrom"].request_data;
+                //数据表格参数处理
+                // let _url = this.$my.path+"/asset/add";
+                /*this.$my.post(this,_url,this.from,function(data){
+                    if(data.status == 0){
+                        this.$message({type: "success", message: "保存成功！"});
+                        this.display = false;
+                    }
                 });*/
+                let _url = "http://10.231.132.130:8082/asset/add?access_token=0e0dc4be-47d9-4ce3-b166-09bd9cf72e9c";
+                this.$axios({method: "post",url: _url,headers: { 'Content-Type': 'application/json' },data: JSON.stringify({params: this.from})}).then(res=>{
+                    if(res.status == 200 && res.data.status == 0){
+                       this.$message({type: "success", message: "保存成功！"});
+                       this.display = false;
+                    }
+                })
             },
             //分配表格添加数据
             handlerdistrubutionAddClick(e){
-                this.from.distribution_table.push({
+                this.from.distributionList.push({
                     UNITS_ASSIGNED: {value: 0, isEdit: false},  //数量
                     GCC_SEGS: {value: "", isEdit: false},   //折旧分配账户
                     USE_PERSON: {value: "", isEdit: false},  //使用人
@@ -667,7 +689,7 @@
             },
             //分配数据删除操作
             handlerdistrubutionDelClick(e){
-                let _data = this.from.distribution_table;
+                let _data = this.from.distributionList;
                 if(_data.length <= 1) this.$message({type: "warning",message: "请至少保留一行！"});
                 else{
                     let new_data = [],_index = e.$index;
@@ -675,7 +697,7 @@
                         if((i*1) == _index) continue;
                         new_data.push(_data[i]);
                     }
-                    this.from.distribution_table = new_data;
+                    this.from.distributionList = new_data;
                 }
             },
             //分配单元格点击事件
@@ -694,6 +716,8 @@
                     if(typeof row[key] == "object")
                         row[key].isEdit = true;
                 }
+                //用于子组件的操作参数回显
+                this.column_element = cell.getElementsByTagName("input");
             },
             //资源表格添加数据
             handlerFileTableAddClick(){
@@ -720,7 +744,6 @@
             handleUpload(response, file, fileList){
                 if(response.status == 0){
                     let data = response.message;
-
                 }
             },
             //对文件类型选择后的上传样式进行改变
@@ -731,13 +754,18 @@
             },
             //级联选择器的change事件的绑定
             handleCascaderEvent(val){
-                this.$refs["assetTypeFrom"].url=this.$my.path_app+"/data/fieldConfigList?assetTypeCode="+val[val.length - 1];
-                this.$refs["assetTypeFrom"].handeGetData();
+                this.$refs["assetTypeFrom"].url=this.$my.path+"/ams/data/fieldConfigList";
+                this.$refs["assetTypeFrom"].handeGetData({assetTypeCode: val[val.length - 1]});
+                if(!!this.from.BOOK_TYPE_CODE){
+                    this.$refs["assetTypeFrom2"].url=this.$my.path+"/ams/data/fieldConfigList2";
+                    this.$refs["assetTypeFrom2"].handeGetData({assetTypeCode: val[val.length - 1], bookTypeCode: this.from.BOOK_TYPE_CODE});
+                }
             },
-            //设置是否研发资产参数
-            handleSetATTRIBUTE30(val){
-                console.log(val);
-            }
+            //分配表格拆旧分配账户
+            handleGccSegs(e){
+                this.$refs["childDialog"].display = true;
+                this.$refs["childDialog"].element = this.column_element;
+            },
         }
     }
 </script>

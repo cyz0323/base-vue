@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e834812-ef06-44d9-bd40-6bb02ddfe418" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionEdit.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionList.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetGccSegsDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/defalut.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/defalut.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/api/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/api/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionEdit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionEdit.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/common/components/y-table.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/common/components/y-table.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionEdit.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page/zcgl/assetTypeCascader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetTypeCascader.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page/zcgl/zcdb/nbzcdc.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/zcgl/zcdb/nbzcdc.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page/zcgl/zctjedit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page/zcgl/assetTypeCascader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,53 +29,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/router/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetAdditionList.vue">
+        <entry file="file://$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="74" column="20" lean-forward="true" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
+            <state relative-caret-position="635">
+              <caret line="72" column="48" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetAdditionEdit.vue">
+        <entry file="file://$PROJECT_DIR$/src/components/page/common/components/y-table.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="381" column="42" lean-forward="true" selection-start-line="381" selection-start-column="42" selection-end-line="381" selection-end-column="42" />
+            <state relative-caret-position="185">
+              <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
               <folding>
-                <element signature="n#style#0;n#el-collapse#0;n#div#1;n#el-form#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-table#0;n#template#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-table#0;n#template#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#el-table#1;n#template#1;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/page/api/Login.vue">
+        <entry file="file://$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionEdit.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+            <state relative-caret-position="450">
+              <caret line="386" column="22" selection-start-line="386" selection-start-column="16" selection-end-line="386" selection-end-column="22" />
+              <folding>
+                <element signature="e#21799#21851#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetTypeCascader.vue">
+        <entry file="file://$PROJECT_DIR$/src/assets/defalut.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+            <state relative-caret-position="340">
+              <caret line="108" column="42" lean-forward="true" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -79,36 +77,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>发票</find>
-      <find>权属单位</find>
-      <find>use_type</find>
-      <find>附件</find>
-      <find>handleCascaderEvent</find>
-      <find>distribution_table</find>
-      <find>RESPONSIBLE_DEPARTMENT</find>
-      <find>RESPONSIBLE_DEPARTMENTUSE_PERSON</find>
-      <find>split</find>
+      <find>assetAdditionList.vue</find>
+      <find>assetTypeCascader</find>
+      <find>zctjedit</find>
+      <find>zcgl</find>
+      <find>appendToBody</find>
+      <find>showChildDialog</find>
+      <find>handeGetData</find>
+      <find>gccSegsDialog</find>
+      <find>文件上传</find>
+      <find>console.log</find>
+      <find>file_path</find>
+      <find>post</find>
+      <find>添加</find>
+      <find>asset-type-cascader</find>
+      <find>states</find>
+      <find>list</find>
+      <find>options</find>
       <find>value</find>
-      <find>invoice_table</find>
-      <find>折旧/摊销起始日期</find>
-      <find>value1</find>
-      <find>IS_SAFETY_DEVICE</find>
+      <find>handleGccSegs</find>
+      <find>childDialog</find>
+      <find>handleColumnClick</find>
+      <find>column_element</find>
       <find>LOCATION</find>
-      <find>是否研发资产</find>
-      <find>ATTRIBUTE30</find>
-      <find>cascader_val</find>
-      <find>asset</find>
-      <find>asset_type_cas</find>
-      <find>级联</find>
-      <find>/data/fieldConfigList</find>
-      <find>资产类别详情设置</find>
-      <find>fieldConfigList</find>
-      <find>modelType</find>
-      <find>保 存</find>
-      <find>资产类型</find>
-      <find>资产类别</find>
-      <find>path2</find>
-      <find>保存</find>
+      <find>col1</find>
+      <find>formInline</find>
+      <find>getData</find>
+      <find>分页</find>
+      <find>isSearch</find>
+      <find>queryParma</find>
+      <find>ASSET_ID</find>
     </findStrings>
     <dirStrings>
       <dir>C:\install_file\base-vue\my-first-vue-project\base-vue</dir>
@@ -120,9 +118,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/page/zcgl/zcdbcx.vue" />
-        <option value="$PROJECT_DIR$/src/components/page/zcgl/zcdc.vue" />
-        <option value="$PROJECT_DIR$/src/components/page/zcgl/zcdr.vue" />
         <option value="$PROJECT_DIR$/src/components/page/zcgl/zcdbedit.vue" />
         <option value="$PROJECT_DIR$/src/components/page/zcgl/nbzcdc.vue" />
         <option value="$PROJECT_DIR$/src/components/page/zcgl/zctj.vue" />
@@ -154,22 +149,26 @@
         <option value="$PROJECT_DIR$/src/components/common/Sidebar.vue" />
         <option value="$PROJECT_DIR$/src/components/page/common/table.vue" />
         <option value="$PROJECT_DIR$/src/components/page/common/from.vue" />
-        <option value="$PROJECT_DIR$/src/components/page/zcgl/zcdb/nbzcdc.vue" />
         <option value="$PROJECT_DIR$/src/components/page/api/BaseTable.vue" />
         <option value="$PROJECT_DIR$/src/components/page/zcgl/assetAddition.vue" />
-        <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/common/Tags.vue" />
         <option value="$PROJECT_DIR$/src/components/common/Home.vue" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/vue.config.js" />
-        <option value="$PROJECT_DIR$/src/components/page/common/components/y-table.vue" />
         <option value="$PROJECT_DIR$/src/components/common/Header.vue" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionList.vue" />
-        <option value="$PROJECT_DIR$/src/assets/defalut.js" />
-        <option value="$PROJECT_DIR$/src/components/page/api/Login.vue" />
         <option value="$PROJECT_DIR$/src/components/page/zcgl/assetTypeCascader.vue" />
         <option value="$PROJECT_DIR$/src/components/page/zcgl/assetAdditionEdit.vue" />
+        <option value="$PROJECT_DIR$/src/router/index.js" />
+        <option value="$PROJECT_DIR$/src/components/page/zcgl/zcdb/nbzcdc.vue" />
+        <option value="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetTypeCascader.vue" />
+        <option value="$PROJECT_DIR$/src/components/page/api/Login.vue" />
+        <option value="$PROJECT_DIR$/src/assets/defalut.js" />
+        <option value="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetGccSegsDialog.vue" />
+        <option value="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionEdit.vue" />
+        <option value="$PROJECT_DIR$/src/components/page/common/components/y-table.vue" />
+        <option value="$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionList.vue" />
       </list>
     </option>
   </component>
@@ -221,7 +220,39 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="page" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="assetManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="base-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="base-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+              <item name="assetManager" type="462c0819:PsiDirectoryNode" />
+              <item name="assetAdd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="base-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="base-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="base-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="base-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="page" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="base-vue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="base-vue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="router" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -235,7 +266,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/node_modules/jquery/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/page/zcgl" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -243,13 +274,15 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.1.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\install_file\base-vue\my-first-vue-project\base-vue\src\components\page\zcgl\zcdb" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\install_file\base-vue\base-vue\src\components\page\zcgl" />
+      <recent name="C:\install_file\base-vue\base-vue\src\components\page\assetManager\assetAdd" />
       <recent name="C:\install_file\base-vue\base-vue\node_modules\jquery\lib" />
       <recent name="C:\install_file\base-vue\my-first-vue-project\base-vue\src\components\page\common" />
       <recent name="C:\install_file\base-vue\my-first-vue-project\base-vue\src\components\page\zcgl" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\install_file\base-vue\my-first-vue-project\base-vue\src\components\page\zcgl\zcdb" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -291,7 +324,7 @@
       <workItem from="1559264919310" duration="35037000" />
       <workItem from="1559434861847" duration="25848000" />
       <workItem from="1559524023216" duration="25435000" />
-      <workItem from="1559608668405" duration="36130000" />
+      <workItem from="1559608668405" duration="61153000" />
     </task>
     <task id="LOCAL-00001" summary="修改描述文件">
       <created>1559122533427</created>
@@ -311,13 +344,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="343095000" />
+    <option name="totallyTimeSpent" value="368118000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="26" width="1936" height="1062" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49923897" visible="true" weight="0.16183448" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49923897" visible="true" weight="0.16183448" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" sideWeight="0.50076103" side_tool="true" weight="0.16183448" />
@@ -331,7 +364,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32925472" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.189099" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.18242492" />
       <window_info anchor="bottom" id="TypeScript" order="11" weight="0.32925472" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -346,13 +379,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="修改描述文件" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/axios/index.d.ts" />
-    <entry file="file://$PROJECT_DIR$/node_modules/qs/lib/index.js" />
-    <entry file="file://$PROJECT_DIR$/src/components/page/common/components/yTable.vue" />
-    <entry file="file://$PROJECT_DIR$/src/components/page/common/components/init.js" />
-    <entry file="file://$PROJECT_DIR$/postcss.config.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -361,7 +387,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/init_component.js" />
     <entry file="file://$PROJECT_DIR$/src/components/page/common/custom_select.vue" />
-    <entry file="file://$PROJECT_DIR$/node_modules/vue/types/vue.d.ts" />
     <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/zctj.vue" />
     <entry file="file://$PROJECT_DIR$/src/components/page/common/message.vue">
       <provider selected="true" editor-type-id="text-editor">
@@ -594,13 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/zcdb/nbzcdc.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2290">
-          <caret line="17" column="41" lean-forward="true" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/api/BaseTable.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
@@ -612,13 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="14" column="26" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="14" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/common/Sidebar.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="51" column="50" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -655,18 +666,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/page/common/components/y-tree.vue">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/common/components/y-table.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="133" column="13" lean-forward="true" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#el-table#0;n#template#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-table#0;n#template#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-table#1;n#template#1;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
@@ -698,13 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vue.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/vuetable.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -729,16 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/common/Header.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -746,41 +728,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/defalut.js">
+    <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetAdditionList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2875">
-          <caret line="115" column="60" selection-start-line="115" selection-start-column="60" selection-end-line="115" selection-end-column="60" />
+        <state relative-caret-position="-1325">
+          <caret line="49" column="17" lean-forward="true" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetTypeCascader.vue">
+    <entry file="file://$PROJECT_DIR$/node_modules/element-ui/packages/table/src/table-column.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+        <state relative-caret-position="290">
+          <caret line="139" column="2" selection-start-line="139" selection-start-column="2" selection-end-line="139" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/api/Login.vue">
+    <entry file="file://$PROJECT_DIR$/vue.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="57" column="43" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+        <state relative-caret-position="450">
+          <caret line="18" column="33" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/Sidebar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="51" column="50" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetAdditionEdit.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="381" column="42" lean-forward="true" selection-start-line="381" selection-start-column="42" selection-end-line="381" selection-end-column="42" />
+        <state relative-caret-position="375">
+          <caret line="739" column="14" lean-forward="true" selection-start-line="739" selection-start-column="14" selection-end-line="739" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetTypeCascader.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/zcdb/nbzcdc.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="58" column="44" lean-forward="true" selection-start-line="58" selection-start-column="44" selection-end-line="58" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-750">
+          <caret line="36" column="75" selection-start-line="36" selection-start-column="71" selection-end-line="36" selection-end-column="75" />
           <folding>
-            <element signature="n#style#0;n#el-collapse#0;n#div#1;n#el-form#0;n#el-dialog#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page/zcgl/assetAdditionList.vue">
+    <entry file="file://$PROJECT_DIR$/node_modules/vue/types/vue.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="74" column="20" lean-forward="true" selection-start-line="74" selection-start-column="20" selection-end-line="74" selection-end-column="20" />
+        <state relative-caret-position="290">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/api/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetTypeCascader.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetGccSegsDialog.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="100" column="31" selection-start-line="100" selection-start-column="31" selection-end-line="100" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionEdit.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="386" column="22" selection-start-line="386" selection-start-column="16" selection-end-line="386" selection-end-column="22" />
+          <folding>
+            <element signature="e#21799#21851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/defalut.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="108" column="42" lean-forward="true" selection-start-line="108" selection-start-column="12" selection-end-line="108" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/common/components/y-table.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#el-table#0;n#template#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-table#0;n#template#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-table#1;n#template#1;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page/assetManager/assetAdd/assetAdditionList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="635">
+          <caret line="72" column="48" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
         </state>
       </provider>
     </entry>

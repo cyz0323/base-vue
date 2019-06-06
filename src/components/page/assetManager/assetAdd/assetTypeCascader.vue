@@ -45,10 +45,9 @@
             //this.handeGetData();
         },
         methods: {
-            handeGetData(){
+            handeGetData(param){
                 let self = this;this.request_data = [];
-                this.$my.get(this,this.url, function(data){
-                    console.log(data);
+                this.$my.post(this,this.url,param, function(data){
                     data = JSON.parse(data);
                     self.from_list = data;
                     for(let i in data)

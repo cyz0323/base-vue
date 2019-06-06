@@ -91,6 +91,7 @@
                 pageCount: 0,       //总数
                 pageSize: 100,        //每页数量
                 pageNo: 0,          //当前页数
+                queryParam: {},
                 tableHeader: [],    //表头定义
                 tableData: [],      //表格数据
                 selectionChanges: [],//选中的数据
@@ -110,6 +111,8 @@
             this.isSort = this.param.hasOwnProperty("isSort") ? this.param.isSort : false;
             this.isCheck = this.param.hasOwnProperty("isCheck") ? this.param.isCheck : false;
             this.openConent = this.param.hasOwnProperty("openConent") ? this.param.openConent : false;
+            //检索参数设置
+            this.queryParam = this.param.hasOwnProperty("queryParam") ? this.param.queryParam : {};
             //表头的设置
             if(this.isArray("header")){
                 this.tableHeader = this.param.header;
@@ -139,7 +142,7 @@
                 this.pageSize = this.param.hasOwnProperty("pageSize") ? this.param.pageSize : 10;
                 this.tableData = this.setDataList(this.param.data);
             }else{
-                this.getData(this.url);
+                this.getData();
             }
         },
         methods: {
@@ -159,12 +162,14 @@
             getData(url){
                 let self = this;
                 //获取参数列表
-                this.$axios.post(url).then(res => {return res}).then(res=>{
+                /*this.$axios.post(url).then(res => {return res}).then(res=>{
+                    console.log(res);
                     if(res.status == 200) {
                         //以下为返回数据
                         let data = res.data;
                         if(data.status == 0){
                             data = data.message;
+                            console.log(data);
                             if(self.tableHeader.length == 0)    self.tableHeader = data.tableHeader;
                             //表格参数处理
                             self.pageCount = data.count;
@@ -176,7 +181,42 @@
                     }
                 }).catch(err=>{
                     this.$message(err.toString());
-                })
+                })*/
+                //let access_token = window.localStorage.getItem("user_token");
+                let access_token = "2de0eb09-7931-44e1-b857-1c647f907576";
+                url = !!url ? url : this.url;
+                if(!!access_token){     //登陆成功
+
+                    let opts = {
+                        method: "post",     //请求类型
+                        url: url+"?access_token="+access_token,     //请求地址处理
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },      //请求头设定
+                        data: JSON.stringify({params: this.queryParam})        //请求参数处理
+                    };
+                    this.$axios(opts).then(res=>{
+                        if(res.status == 200){
+                            //以下为返回数据
+                            let data = res.data;
+                            if(data.status == 0){
+                                data = JSON.parse(data.message);
+                                if(self.tableHeader.length == 0)    self.tableHeader = data.tableHeader;
+                                //表格参数处理
+                                self.pageCount = data.count;
+                                self.pageNo = data.pageCurrent;
+                                self.pageSize = data.pageSize;
+                                //根据页内显示条数的配置对数据表格进行设置
+                                self.tableData = self.setDataList(data.list);
+                            }
+                        }
+                    }).catch(err=>{
+                        console.log(err);
+                    });
+                }else{
+                    window.localStorage.clear();    //清除所有缓存
+                    this.$router.push("/login");
+                }
             },
             //分页参数改变时触发
             handlerCurrentChange(e){
@@ -185,7 +225,9 @@
                 }else{  //以请求的方式加载数据
                     this.pageNo = e;
                     let url = this.url+"?pageNo="+e+"&pageSize="+this.pageSize;
-                    this.getData(url);
+                    console.log(this.queryParam);
+                    console.log(url);
+                    //this.getData(url);
                 }
             },
             handlerTableSelection(s) {

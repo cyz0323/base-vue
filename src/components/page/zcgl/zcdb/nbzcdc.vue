@@ -56,7 +56,7 @@
         <!-- 编辑弹出框 -->
         <el-dialog title="详细信息" :visible.sync="editVisible" width="65%">
             <div>
-                <zctjedit></zctjedit>
+                <!--<zctjedit></zctjedit>-->
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="editVisible = false">返 回</el-button>
@@ -76,11 +76,10 @@
 </template>
 
 <script>
-    import zctjedit from '../assetTypeCascader'
     import zcdbedit from './zcdbedit';
     export default {
         name: 'zcdbcx',
-        components: {zcdbedit,zctjedit},
+        components: {zcdbedit},
         data() {
             return {
                 url: 'http://localhost:8888/zcgl/xc',            //请求地址

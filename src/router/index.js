@@ -10,7 +10,7 @@ export default new Router({
             path: '/',
             redirect: '/dashboard'
         },
-        {
+        /*{
             path: '/',
             component: resolve => require(['../components/common/Home.vue'], resolve),
             meta: { title: '自述文件' },
@@ -20,18 +20,18 @@ export default new Router({
                     component: resolve => require(['../components/page/api/Dashboard.vue'], resolve),
                     meta: { title: '系统首页' }
                 },
-                /*资产添加*/
+                /!*资产添加*!/
                 {
                     path: '/asset-addition',
-                    component: resolve => require(['../components/page/zcgl/assetAdditionList.vue'], resolve),
+                    component: resolve => require(['../components/page/assetManager/assetAdd/assetAdditionList.vue'], resolve),
                     meta: {title: '资产添加'}
                 },
-                {
+                /!*{
                     path: '/asset-addition-add',
-                    component: resolve => require(['../components/page/zcgl/assetAdditionEdit.vue'], resolve),
+                    component: resolve => require(['../components/page/assetManager/assetAdd/assetAdditionEdit.vue'], resolve),
                     meta: {title: '资产添加'}
-                },
-                /* 资产调拨管理 */
+                },*!/
+                /!* 资产调拨管理 *!/
                 {
                     path: '/zcdbcx',
                     component: resolve => require(['../components/page/zcgl/zcdb/zcdbcx.vue'], resolve),
@@ -58,7 +58,7 @@ export default new Router({
                     meta: {title: '外部资产调入'}
                 }
             ]
-        },
+        },*/
         {
             path: '/',
             component: resolve => require(['../components/common/Home.vue'], resolve),
@@ -74,7 +74,7 @@ export default new Router({
                 /*资产添加*/
                 {
                     path: 'assetAddition',
-                    component: resolve => require(['../components/page/zcgl/assetAdditionList.vue'], resolve),
+                    component: resolve => require(['../components/page/assetManager/assetAdd/assetAdditionList.vue'], resolve),
                     meta: {title: '资产添加'}
                 },
                 /* 资产调拨管理 */

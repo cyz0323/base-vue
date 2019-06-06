@@ -55,7 +55,6 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                        this.$axios.post(path).then( res =>{
-                           console.log(res);
                             let _data = res.data;
                             if(_data.status == 0){
                                 localStorage.setItem('user_name',self.ruleForm.username);
