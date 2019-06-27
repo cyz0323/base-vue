@@ -54,6 +54,11 @@
                     +"&password="+this.ruleForm.password+"&client_id="+this.client_id+"&client_secret="+this.client_secret;
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
+                        localStorage.setItem('user_name',"zhangsan");
+                        localStorage.setItem('user_token',"123");
+                        localStorage.setItem("userinfo",{});
+                		this.$router.push("/");
+                        /*
                        this.$axios.post(path).then( res =>{
                             let _data = res.data;
                             if(_data.status == 0){
@@ -67,6 +72,7 @@
                             if(!!err.response)  this.$message(err.response.data.message);
                             else this.$message("服务出现错误："+err.toString());
                         });
+                        */
                     } else {
                         this.$message("验证失败，输入格式错误！。");
                         return false;
