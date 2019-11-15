@@ -36,29 +36,10 @@
     import bus from '../common/bus';
     export default {
         data() {
-            var userinfo = JSON.parse(localStorage.getItem("userinfo"));
-            var _fl = userinfo?userinfo.currentDuty.functionList : [];
-
             return {
                 collapse: false,
                 items: [
-                    {icon: 'el-icon-lx-home',index: 'dashboard',title: '系统首页',display: _fl.indexOf('dashboard')> -1 },
-                    {
-                        icon: "el-icon-lx-cascades",
-                        index: "zcgl",
-                        title: "资产管理",
-                        display: _fl.indexOf('zcgl')> -1,
-                        subs: [
-                            {index: "assetAddition", title: "资产添加", display: _fl.indexOf('zctj') > -1},
-                            {index: "zcdb",title: "资产调拨",display: _fl.indexOf('zcdb') > -1,subs:[
-                                {index: "zcdbcx",title: "资产调拨查询",display: _fl.indexOf('zcdbcx')> -1},
-                                {index: 'nbzcdc',title: "内部资产调出",display: _fl.indexOf('nbzcdc')> -1},
-                                {index: 'nbzcdr',title: "内部资产调入",display: _fl.indexOf('nbzcdr')> -1},
-                                {index: 'wbzcdc',title: "外部资产调出",display: _fl.indexOf('wbzcdc')> -1},
-                                {index: "wbzcdr",title: "外部资产调入",display: _fl.indexOf('wbzcdr')> -1}
-                            ]},
-                        ]
-                    },
+                    {icon: 'el-icon-lx-home',index: 'dashboard',title: '系统首页'},
                     {
                         icon: "el-icon-lx-copy",
                         index: 'api',

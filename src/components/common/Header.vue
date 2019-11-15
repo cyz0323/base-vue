@@ -4,7 +4,7 @@
         <div class="collapse-btn" @click="collapseChage">
             <i class="el-icon-menu"></i>
         </div>
-        <div class="logo">后台管理系统</div>
+        <div class="logo">后台系统模板</div>
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 全屏显示 -->
@@ -30,9 +30,6 @@
                         {{username}} <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <!--<a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
-                            <el-dropdown-item>项目仓库</el-dropdown-item>
-                        </a>-->
                         <a href="#" target="_blank">
                             <el-dropdown-item>修改密码</el-dropdown-item>
                         </a>
