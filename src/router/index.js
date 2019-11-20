@@ -10,17 +10,17 @@ let routers = [
         component: resolve => require(['../components/common/Home.vue'], resolve),
         meta: { title: '自述文件' },
         children:[
-            /*********************************测试跳转*********************************/
-            {
-                path: '/test',
-                component: resolve => require(['../components/page/api/Dashboard.vue'], resolve),
-                meta: { title: '系统首页' }
-            },
             /*********************************About APP*********************************/
             {
                 path: '/dashboard',
                 component: resolve => require(['../components/page/api/Dashboard.vue'], resolve),
                 meta: { title: '系统首页' }
+            },
+             /*********************************测试跳转*********************************/
+            {
+                path: '/testpage',
+                component: resolve => require(['../components/page/demo/test.vue'], resolve),
+                meta: { title: '测试页面' }
             },
             /*********************************About API*********************************/
             {

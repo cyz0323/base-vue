@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
+import App from '@/App.vue';
+import router from '@/router';
 import axios from 'axios';
 //import $ from 'jquery'
 import ElementUI from 'element-ui';
@@ -8,17 +8,16 @@ import VueI18n from 'vue-i18n';
 import VueResource from 'vue-resource';
 import qs from 'qs';    //json转字符串操作
 //自定义组件定义
-import yTable from './components/page/common/components/y-table';
-import ySelect from './components/page/common/components/y-select';
+import yTable from '@/components/page/common/components/y-table';
+import ySelect from '@/components/page/common/components/y-select';
 
-import defaultParam from './assets/defalut.js';
-import * as filters from './assets/js/filter.js';
-import index from './assets/js/index.js';
-import { messages } from './components/common/i18n';
+import defaultParam from '@/assets/defalut.js';
+import * as filters from '@/assets/js/filter.js';
+import index from '@/assets/js/index.js';
+import { messages } from '@/components/common/i18n';
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
-// import '../static/css/theme-green/index.css';       // 浅绿色主题
-import './assets/css/icon.css';
-import './components/common/directives';
+import '@/assets/css/icon.css';
+import '@/components/common/directives';
 import "babel-polyfill";
 
 Vue.config.productionTip = false;
@@ -44,6 +43,7 @@ Object.keys(filters).forEach(key => {
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
     const role = localStorage.getItem('user_name');
+    console.log(to.path);
     if (!role && to.path !== '/login') {
         next('/login');
     }

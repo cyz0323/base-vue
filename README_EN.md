@@ -1,4 +1,4 @@
-# vue-manage-system #
+# base-vue #
 The web management system solution based on Vue2 and Element-UI。[live demo](http://blog.gdfengshuo.com/example/work/)
 
 ## Donation
@@ -28,8 +28,8 @@ The scheme as a set of multi-function background frame templates, suitable for m
 
 ## Installation steps ##
 
-	git clone https://github.com/lin-xin/vue-manage-system.git		// Clone templates
-	cd vue-manage-system											// Enter template directory
+	git clone https://github.com/cyz0323/base-vue.git 		// Clone templates
+	cd base-vue											// Enter template directory
 	npm install													// Installation dependency
 
 ## Local development ##
