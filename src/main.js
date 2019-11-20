@@ -12,6 +12,8 @@ import yTable from './components/page/common/components/y-table';
 import ySelect from './components/page/common/components/y-select';
 
 import defaultParam from './assets/defalut.js';
+import * as filters from './assets/js/filter.js';
+import index from './assets/js/index.js';
 import { messages } from './components/common/i18n';
 import 'element-ui/lib/theme-chalk/index.css'; // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
@@ -19,19 +21,25 @@ import './assets/css/icon.css';
 import './components/common/directives';
 import "babel-polyfill";
 
-Vue.config.productionTip = false
-Vue.use(VueI18n);
-Vue.use(ElementUI, {size: 'small'});
-Vue.use(VueResource);
+Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 Vue.prototype.$qs = qs;
 Vue.prototype.$my = defaultParam;
 //Vue.prototype.$ = $;
+Vue.use(VueI18n);
+Vue.use(ElementUI, {size: 'small'});
+Vue.use(VueResource);
+Vue.use(index);
+
 /*自定义组件声明*/
 Vue.component("y-table", yTable);
 Vue.component("y-select", ySelect);
-
+//中英文
 const i18n = new VueI18n({locale: 'zh',messages});
+//filter导入
+Object.keys(filters).forEach(key => {  
+    Vue.filter(key, filters[key])  
+})  
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
