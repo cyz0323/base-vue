@@ -22,6 +22,11 @@ let routers = [
                 component: resolve => require(['../components/page/demo/test.vue'], resolve),
                 meta: { title: '测试页面' }
             },
+            {
+                path: '/testpage2',
+                component: resolve => require(['../components/page/demo/test2.vue'], resolve),
+                meta: { title: '测试页面' }
+            },
             /*********************************About API*********************************/
             {
                 path: '/icon',

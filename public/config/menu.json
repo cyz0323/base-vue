@@ -2,7 +2,8 @@
     "items": [
         {"icon": "el-icon-lx-home","index": "dashboard","title": "系统首页"},
         {"icon": "el-icon-set-up", "index": "demo", "title": "Demo", "subs": [
-            {"index": "testpage","title": "测试页面"}
+            {"index": "testpage","title": "测试页面"},
+            {"index": "testpage2","title": "测试页面2"}
         ]},
         {"icon": "el-icon-lx-copy", "index": "api", "title": "Element API", "subs": [
             {"index": "table","title": "基础表格"},
