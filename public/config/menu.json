@@ -2,6 +2,7 @@
     "items": [
         {"icon": "el-icon-lx-home","index": "dashboard","title": "系统首页"},
         {"icon": "el-icon-set-up", "index": "demo", "title": "Demo", "subs": [
+            {"index": "G6Demo","title": "G6 - 图表"},
             {"index": "testpage","title": "测试页面"},
             {"index": "testpage2","title": "测试页面2"}
         ]},

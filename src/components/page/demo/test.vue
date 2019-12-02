@@ -176,8 +176,9 @@ export default{
                   type: 'dagre',
                   rankdir: 'LR'
                 },
+                //交互管理配置
                 modes: {
-                  default: ['drag-canvas']
+                  default: ['drag-canvas', 'zoom-canvas', 'drag-node']    //允许画布拖拽、缩放，允许节点拖拽
                 },
                 defaultNode: {
                   shape: "node",

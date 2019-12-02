@@ -16,7 +16,7 @@ let routers = [
                 component: resolve => require(['../components/page/api/Dashboard.vue'], resolve),
                 meta: { title: '系统首页' }
             },
-             /*********************************测试跳转*********************************/
+            /**********************************测试跳转*********************************/
             {
                 path: '/testpage',
                 component: resolve => require(['../components/page/demo/test.vue'], resolve),
@@ -26,6 +26,12 @@ let routers = [
                 path: '/testpage2',
                 component: resolve => require(['../components/page/demo/test2.vue'], resolve),
                 meta: { title: '测试页面' }
+            },
+            /***********************************Demo***********************************/
+            {
+                path: '/G6Demo',
+                component: resolve => require(['../components/page/demo/G6/G6.vue'], resolve),
+                meta: { title: '图表示例' }
             },
             /*********************************About API*********************************/
             {
