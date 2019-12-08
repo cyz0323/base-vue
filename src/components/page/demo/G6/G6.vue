@@ -1,55 +1,74 @@
 <template>
-    <el-card class="box-card" style="height: 100%">
-      <el-row :gutter="20">
-        <el-col :span="18">
-          <div class="grid-content bg-purple">123</div>
-        </el-col>
-        <el-col :span="6">
-          <div class="grid-content bg-purple">123</div>
-        </el-col>
-      </el-row>
-      <!-- <div id="mountNode" style="border: 1px solid #ffa"></div> -->
-    </el-card>
+    <div class="G6-box" id="G6">
+        <!-- 操作条 -->
+        <g-menu class="G6-menu"></g-menu>
+        <!-- 编辑框 -->
+        <g-editor class="G6-editer"></g-editor>
+        <!-- 显示区域 -->
+        <g-draw v-if="isShow" class="mountNode" :width="G6_width"></g-draw>
+    </div>
 </template>
 
 <script>
-import G6 from '@antv/g6';
+import GMenu from './menu';
+import GEditor from './editor';
+import GDraw from './draw';
 export default{
-    name: 'customTable',
+    name: 'G6_table',
+    components: {GMenu,GEditor,GDraw},
     data(){
         return {
-            title: "自定义数据表格",
-            activeName: 'first-ele',
-            showPagination: true,   //分页显示与否默认显示
-            tableData: {
-                nodes: [
-                    {id: "1",label: "请求回放1（开始）",type: "begin"}, 
-                    {id: "2",label: "交易创建"}, 
-                    {id: "3",label: "请求回放3"}, 
-                    {id: "4",label: "请求回放4"}, 
-                    {id: "5",label: "请求回放5"}, 
-                    {id: "6",label: "请求回放6"}, 
-                    {id: "7",label: "请求回放2（结束）",type: "end"}
-                ],
-                edges: [
-                    {source: "1",target: "2"}, 
-                    {source: "1",target: "3"}, 
-                    {source: "2",target: "5"}, 
-                    {source: "5",target: "6"}, 
-                    {source: "6",target: "7"}, 
-                    {source: "3",target: "4"}, 
-                    {source: "4",target: "7"}
-                ]
-            }
+            // 宽度的定义
+            G6_width: null,
+            //图例显示的控制
+            isShow: false,
         }
     },
     created(){
-        
+        this.$nextTick(_ => {
+            // 图表参数定义
+            this.handleInitParam();
+        });
     },
     methods: {
+        // 图表初始化
+        handleInitParam(){
+            let doc = document.getElementById("G6");
+            this.G6_width = doc.offsetWidth;
+            this.isShow = true;
+        }
     }
 }
 </script>
 
 <style scoped>
+.G6-box{width: 100%;height: 100%;position: relative;background: #e6e6e6;}
+/* 菜单条定义 */
+.G6-box>.G6-menu{
+    position: absolute;
+    width: 50px;
+    min-height: 200px;
+    border-radius: 5px;
+    left: 10px;
+    top: 10px;
+    box-shadow: 0 0 5px #fff;
+    background: #f6f6f6;
+    z-index: 1000;
+}
+/* 编辑框定义 */
+.G6-box>.G6-editer{
+    position: absolute;
+    min-width: 300px;
+    min-height: 400px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #fff;
+    background: #f6f6f6;
+    right: 10px;
+    top: 10px;
+    z-index: 1000;
+}
+/* 图表框定义 */
+.G6-box>.mountNode{
+    width: 100%;
+}
 </style>
