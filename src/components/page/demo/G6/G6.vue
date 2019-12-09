@@ -3,7 +3,7 @@
         <!-- 操作条 -->
         <g-menu class="G6-menu"></g-menu>
         <!-- 编辑框 -->
-        <g-editor class="G6-editer"></g-editor>
+        <g-editor v-if="isShowEdit" class="G6-editer" @toBack="handleCloseEdit"></g-editor>
         <!-- 显示区域 -->
         <g-draw v-if="isShow" class="mountNode" :width="G6_width"></g-draw>
     </div>
@@ -22,6 +22,8 @@ export default{
             G6_width: null,
             //图例显示的控制
             isShow: false,
+            // 编辑框显示的控制
+            isShowEdit: true
         }
     },
     created(){
@@ -36,21 +38,30 @@ export default{
             let doc = document.getElementById("G6");
             this.G6_width = doc.offsetWidth;
             this.isShow = true;
+        },
+        // 窗口关闭控制
+        handleCloseEdit(){
+            this.isShowEdit = false;
         }
     }
 }
 </script>
 
 <style scoped>
-.G6-box{width: 100%;height: 100%;position: relative;background: #e6e6e6;}
+.G6-box{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: url('../../../../assets/img/G6/g6_background.jpg');/* no-repeat*/
+}
 /* 菜单条定义 */
 .G6-box>.G6-menu{
     position: absolute;
-    width: 50px;
-    min-height: 200px;
+    width: 40px;
+    min-height: 50px;
     border-radius: 5px;
-    left: 10px;
-    top: 10px;
+    left: 15px;
+    top: 15px;
     box-shadow: 0 0 5px #fff;
     background: #f6f6f6;
     z-index: 1000;
@@ -58,13 +69,14 @@ export default{
 /* 编辑框定义 */
 .G6-box>.G6-editer{
     position: absolute;
-    min-width: 300px;
-    min-height: 400px;
+    /*min-width: 300px;*/
+    width: 300px;
+    min-height: 300px;
     border-radius: 5px;
-    box-shadow: 0 0 5px #fff;
+    box-shadow: 0 0 5px #e6e6e6;
     background: #f6f6f6;
-    right: 10px;
-    top: 10px;
+    right: 15px;
+    top: 15px;
     z-index: 1000;
 }
 /* 图表框定义 */

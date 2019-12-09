@@ -4,6 +4,7 @@
 
 <script>
 import G6 from '@antv/g6';
+import bus from './g6_bus';
 export default{
 	name: "G6_draw",
     props: ["width"],
@@ -11,35 +12,66 @@ export default{
         return {
             // 宽度的定义
             G6_width: this.width,
-            tableData: {
-                nodes: [
-                    {id: "1",label: "请求回放1（开始）",type: "begin"}, 
-                    {id: "2",label: "交易创建"}, 
-                    {id: "3",label: "请求回放3"}, 
-                    {id: "4",label: "请求回放4"}, 
-                    {id: "5",label: "请求回放5"}, 
-                    {id: "6",label: "请求回放6"}, 
-                    {id: "7",label: "请求回放2（结束）",type: "end"}
-                ],
-                edges: [
-                    {source: "1",target: "2"}, 
-                    {source: "1",target: "3"}, 
-                    {source: "2",target: "5"}, 
-                    {source: "5",target: "6"}, 
-                    {source: "6",target: "7"}, 
-                    {source: "3",target: "4"}, 
-                    {source: "4",target: "7"}
-                ]
-            } 
+            // 初始化G6参数信息
+            tableData: {} 
         }
     },
     created(){
         this.$nextTick(_ => {
-            // 图表参数定义
-            this.handleInitG6View();
+            // 初始化页面数据的获取
+            this.handleInitG6Data();
+            // bus事件触发的处理
+            bus.$on("menuClick", (e) => {
+                this.handleMenuClick(e);
+            });
         });
     },
     methods: {
+        /* 
+         * 操作按钮点击的处理 */ 
+        handleMenuClick(e){
+            switch(e){
+              case 'pointer':
+                  this.handleClickPointer();
+                  break;
+              case 'pie':
+                  this.handleClickPie();
+                  break;
+              case 'polygon':
+                  this.handleClickPolygon();
+                  break;
+              case 'line':
+                  this.handleClickLine();
+                  break;
+            }
+        },
+        //选择事件的触发
+        handleClickPointer(){
+            console.log("选择按钮的触发");
+        },
+        //圆形点击
+        handleClickPie(){
+            console.log("圆形按钮点击");
+        },
+        //多边形点击触发
+        handleClickPolygon(){
+            console.log("多边形按钮点击");
+        },
+        //直线的点击触发
+        handleClickLine(){
+            console.log("直线按钮点击");
+        },
+        /*
+         * G6 数据的获取 */
+        handleInitG6Data(){
+            // 获取基础数据并进行绘制
+            this.$my.getSource(this, this.$my.g6_data).then(e => {
+                let data = e.data;
+                this.tableData = data.data1;
+                // 图表参数定义
+                this.handleInitG6View();
+            })
+        },
         /*
          * 图表参数的初始化 */ 
         handleInitG6View(){
@@ -57,8 +89,7 @@ export default{
             };
 
             /**
-            * node 特殊属性
-            */
+            * node 特殊属性 */
             var nodeExtraAttrs = {
                 begin: {
                   fill: "#9FD4FB"
@@ -69,8 +100,7 @@ export default{
             };
 
             /**
-            * 自定义节点
-            */
+            * 自定义节点 */
             G6.registerNode("node", {
                 drawShape: function drawShape(cfg, group) {
                   var rect = group.addShape("rect", {
@@ -105,9 +135,8 @@ export default{
                 }
             }, "single-shape");
 
-              /**
-            * 自定义 edge 中心关系节点
-            */
+            /**
+             * 自定义 edge 中心关系节点 */
             G6.registerNode("statusNode", {
                 drawShape: function drawShape(cfg, group) {
                   var circle = group.addShape("circle", {
@@ -123,8 +152,7 @@ export default{
             }, "single-shape");
 
             /**
-            * 自定义带箭头的贝塞尔曲线 edge
-            */
+            * 自定义带箭头的贝塞尔曲线 edge */
             G6.registerEdge("line-with-arrow", {
                 itemType: "edge",
                 draw: function draw(cfg, group) {
@@ -152,14 +180,12 @@ export default{
                       }
                     }
                   });
-
                   // 如果是不对称的贝塞尔曲线，需要计算贝塞尔曲线上的中心点
                   // 参考资料 https://stackoverflow.com/questions/54216448/how-to-find-a-middle-point-of-a-beizer-curve
                   // 具体Util方法可以参考G：https://github.com/antvis/g/blob/4.x/packages/g-math/src/quadratic.ts
-
                   // 在贝塞尔曲线中心点上添加圆形
                   var source = cfg.source,
-                    target = cfg.target;
+                  target = cfg.target;
 
                   group.addShape("circle", {
                     attrs: {

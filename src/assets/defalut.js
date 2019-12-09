@@ -3,7 +3,8 @@
  * yangzeng 20190523*/
 const defaultParam = {
     path_url: "/config/base_url.json",
-    menu_path: "/config/menu.json"
+    menu_path: "/config/menu.json",
+    g6_data: "/data/G6.json"
 };
 
 /**
