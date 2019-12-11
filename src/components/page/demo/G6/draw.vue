@@ -10,10 +10,14 @@ export default{
     props: ["width"],
     data(){
         return {
-            // 宽度的定义
-            G6_width: this.width,
             // 初始化G6参数信息
-            tableData: {} 
+            G6_InitData: {
+                // 宽度的定义
+                G6_width: this.width,  
+                tableData: {},
+                // 操作对象
+                group: null,  
+            } 
         }
     },
     created(){
@@ -32,33 +36,34 @@ export default{
         handleMenuClick(e){
             switch(e){
               case 'pointer':
-                  this.handleClickPointer();
+                  this.handleClickPointer(e);
                   break;
               case 'pie':
-                  this.handleClickPie();
+                  this.handleClickPie(e);
                   break;
               case 'polygon':
-                  this.handleClickPolygon();
+                  this.handleClickPolygon(e);
                   break;
               case 'line':
-                  this.handleClickLine();
+                  this.handleClickLine(e);
                   break;
             }
         },
         //选择事件的触发
-        handleClickPointer(){
+        handleClickPointer(e){
             console.log("选择按钮的触发");
         },
         //圆形点击
-        handleClickPie(){
-            console.log("圆形按钮点击");
+        handleClickPie(e){
+            this.$my.successMsg(this, "原型点击事件的触发");
+            this.G6_InitData.graph.setMode(e);
         },
         //多边形点击触发
-        handleClickPolygon(){
+        handleClickPolygon(e){
             console.log("多边形按钮点击");
         },
         //直线的点击触发
-        handleClickLine(){
+        handleClickLine(e){
             console.log("直线按钮点击");
         },
         /*
@@ -67,7 +72,7 @@ export default{
             // 获取基础数据并进行绘制
             this.$my.getSource(this, this.$my.g6_data).then(e => {
                 let data = e.data;
-                this.tableData = data.data1;
+                this.G6_InitData.tableData = data.data1;
                 // 图表参数定义
                 this.handleInitG6View();
             })
@@ -75,7 +80,72 @@ export default{
         /*
          * 图表参数的初始化 */ 
         handleInitG6View(){
-            let self = this;
+            let self =this;
+            //节点样式定义
+            let ndoeParam = {
+              shape: "node",
+              labelCfg: {
+                style: {
+                  fill: "#fff",
+                  fontSize: 14
+                }
+              }
+            };
+            //连线样式定义
+            let edgeParam = {
+              shape: "line-with-arrow",
+              style: {
+                endArrow: true,
+                lineWidth: 2,
+                stroke: "#ccc"
+              }
+            };
+            //交互配置参数
+            let modesParam = {
+                default: ['drag-canvas', 'zoom-canvas', 'drag-node'],    //允许画布拖拽、缩放，允许节点拖拽
+                //增加节点交互模式
+                pie: ['click-add-node', 'click-select'],
+                //增加边交互模式
+                addEdge: ['click-add-edge', 'click-select'],
+            };
+            // 节点信息的自定义处理
+            this.handleCustomNode();
+            // 图表对象的声明
+            this.G6_InitData.graph = new G6.Graph({
+                container: "mountNode",
+                width: self.G6_InitData.G6_width,
+                height: 800,
+                // 指定自适应画布大小
+                fitView: true,
+                // 画布留白的宽度的设置
+                fitViewPadding: [150,150,150,150],
+                layout: {
+                  type: 'dagre',
+                  rankdir: 'LR'
+                },
+                //交互管理配置
+                modes: modesParam,
+                //节点样式定义
+                defaultNode: ndoeParam,
+                //连线样式定义
+                defaultEdge: edgeParam
+            });
+            // G6数据初始化
+            this.G6_InitData.graph.data(this.G6_InitData.tableData);
+            this.G6_InitData.graph.render();
+            // 边的点击事件
+            this.G6_InitData.graph.on('edge:click', function(evt) {
+                console.log(123);
+                var target = evt.target;
+                var type = target.get('type');
+                if (type === 'circle') {
+                    // 点击边上的circle
+                    alert('你点击的是边上的圆点');
+                }
+            });
+        },
+        // 自定义节点信息
+        handleCustomNode(){
             var _extends = Object.assign || function(target) {
                 for (var i = 1; i < arguments.length; i++) {
                   var source = arguments[i];
@@ -87,7 +157,6 @@ export default{
                 }
                 return target;
             };
-
             /**
             * node 特殊属性 */
             var nodeExtraAttrs = {
@@ -98,7 +167,6 @@ export default{
                   fill: "#C2E999"
                 }
             };
-
             /**
             * 自定义节点 */
             G6.registerNode("node", {
@@ -134,7 +202,6 @@ export default{
                   return [[0, 0.5], [1, 0.5]];
                 }
             }, "single-shape");
-
             /**
              * 自定义 edge 中心关系节点 */
             G6.registerNode("statusNode", {
@@ -198,50 +265,6 @@ export default{
                   });
 
                   return path;
-                }
-            });
-
-            var graph = new G6.Graph({
-                container: "mountNode",
-                width: self.G6_width,
-                height: 800,
-                layout: {
-                  type: 'dagre',
-                  rankdir: 'LR'
-                },
-                //交互管理配置
-                modes: {
-                  default: ['drag-canvas', 'zoom-canvas', 'drag-node']    //允许画布拖拽、缩放，允许节点拖拽
-                },
-                defaultNode: {
-                  shape: "node",
-                  labelCfg: {
-                    style: {
-                      fill: "#fff",
-                      fontSize: 14
-                    }
-                  }
-                },
-                defaultEdge: {
-                  shape: "line-with-arrow",
-                  style: {
-                    endArrow: true,
-                    lineWidth: 2,
-                    stroke: "#ccc"
-                  }
-                }
-            });
-
-            graph.data(this.tableData);
-            graph.render();
-
-            graph.on('edge:click', function(evt) {
-                var target = evt.target;
-
-                var type = target.get('type');
-                if (type === 'circle') {
-                    // 点击边上的circle
-                    alert('你点击的是边上的圆点');
                 }
             });
         }
