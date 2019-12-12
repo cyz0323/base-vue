@@ -36,35 +36,21 @@ export default{
         handleMenuClick(e){
             switch(e){
               case 'pointer':
-                  this.handleClickPointer(e);
+                  // this.$my.successMsg(this, "选择事件的触发");
+                  this.G6_InitData.graph.setMode('default');
                   break;
               case 'pie':
-                  this.handleClickPie(e);
+                  // this.$my.successMsg(this, "圆形点击事件的触发");
+                  this.G6_InitData.graph.setMode(e);
                   break;
               case 'polygon':
-                  this.handleClickPolygon(e);
+                  this.$my.successMsg(this, "四边形点击事件的触发");
                   break;
               case 'line':
-                  this.handleClickLine(e);
+                  // this.$my.successMsg(this, "连线点击事件的触发");
+                  this.G6_InitData.graph.setMode('addEdge');
                   break;
             }
-        },
-        //选择事件的触发
-        handleClickPointer(e){
-            console.log("选择按钮的触发");
-        },
-        //圆形点击
-        handleClickPie(e){
-            this.$my.successMsg(this, "原型点击事件的触发");
-            this.G6_InitData.graph.setMode(e);
-        },
-        //多边形点击触发
-        handleClickPolygon(e){
-            console.log("多边形按钮点击");
-        },
-        //直线的点击触发
-        handleClickLine(e){
-            console.log("直线按钮点击");
         },
         /*
          * G6 数据的获取 */
@@ -135,7 +121,6 @@ export default{
             this.G6_InitData.graph.render();
             // 边的点击事件
             this.G6_InitData.graph.on('edge:click', function(evt) {
-                console.log(123);
                 var target = evt.target;
                 var type = target.get('type');
                 if (type === 'circle') {
@@ -266,6 +251,82 @@ export default{
 
                   return path;
                 }
+            });
+
+            // 封装点击添加节点的交互 yangzeng-20191212
+            G6.registerBehavior('click-add-node', {
+              // 设定该自定义程序需要的监听事件和相应函数
+              getEvents(){
+                // 监听事件为canvas:click， 响应函数是onClick
+                return {'canvas:click': 'onClick'}
+              },
+              // 点击事件
+              onClick(ev){
+                const graph = this.graph;
+                // 地图上新增一个节点
+                const node = graph.addItem('node', {
+                  x: ev.x,
+                  y: ev.y,
+                  // 生成唯一的 id
+                  id: G6.Util.uniqueId() 
+                })
+              }
+            });
+
+            // 封装边的点击事件 yangzeng - 20191212
+            G6.registerBehavior('click-add-edge', {
+              // 设置该自定义函数需要监听的事件及响应函数
+              getEvents(){
+                return {
+                  // 监听事件 node:click，响应函数时 onClick
+                  'node:click': 'onClick',
+                  // 监听事件 mousemove，响应函数时 onMousemove
+                  mousemove: 'onMousemove',
+                  // 监听事件 edge:click，响应函数时 onEdgeClick
+                  'edge:click': 'onEdgeClick'
+                };
+              },
+              // onClick 响应函数
+              onClick(ev){
+                const node = ev.item;
+                const graph = this.graph;
+                const point = {x: ev.x, y: ev.y};
+                const model = node.getModel();
+                if(this.addingEdge && this.edge){
+                  graph.updateItem(this.edge, {
+                    target: model.id
+                  });
+                  this.edge = null;
+                  this.addingEdge = false;
+                } else {
+                  // 在图上新增一条边，结束点是当前鼠标点击的位置
+                  this.edge = graph.addItem('edge', {
+                    source: model.id,
+                    target: point
+                  });
+                  this.addingEdge = true;
+                }
+              },
+              // mouseove 的响应函数
+              onMousemove(ev){
+                const point = {x: ev.x, y: ev.y};
+                if(this.addingEdge && this.edge){
+                  // 更新边的结束点位置为当前鼠标位置
+                  this.graph.updateItem(this.edge, {
+                    target: point
+                  });
+                }
+              },
+              // 'edge:click' 的响应函数
+              onEdgeClick(){
+                const currentEdge = ev.item;
+                // 拖拽过程中点击会点击到新增的边上
+                if(this.addingEdge && this.edge == currentEdge) {
+                  graph.removeItem(this.edge);
+                  this.edge = null;
+                  this.addingEdge = false;
+                }
+              }
             });
         }
     }
